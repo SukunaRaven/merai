@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+    /* colors */
+    --color-primary: #7FD4E7;
+    --color-blue-light: #858AE3;
+    --color-blue: #613DC1;
+    --color-blue-dark: #4E148C;
+    --color-black-blue: #2C0735;
+    --color-white-blue: #E9F4F6;
+
+    /* fonts */
+    --font-primary: "IBM Plex Sans", sans-serif;
+    --font-secondary: "M PLUS 1", sans-serif;
+
+}
