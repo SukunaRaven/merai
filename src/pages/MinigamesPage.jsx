@@ -1,6 +1,6 @@
 import GameCard from "../components/games/GameCard"
 
-export default function MiniGames() {
+export default function MinigamesPage() {
     return (
         <div>
 
