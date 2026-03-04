@@ -4,7 +4,7 @@ import Homepage from "./pages/Homepage.jsx";
 // import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
 // import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
 // import DataManagement from "./pages/DataManagementPage.jsx"
-// import FamilyPage from "./pages/FamilyPage.jsx"
+import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
 // import PrivacyPage from "./pages/PrivacyPage.jsx"
 // import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
@@ -46,10 +46,10 @@ const router = createBrowserRouter([
             //     path: '/settings/privacy',
             //     element: <PrivacyPage/>
             // },
-            // {
-            //     path: '/settings/family',
-            //     element: <FamilyPage/>
-            // },
+            {
+                path: '/settings/family',
+                element: <FamilyPage/>
+            },
             // {
             //     path: '/tipsandtricks',
             //     element: <AiTipsAndTricksPage/>
