@@ -33,7 +33,7 @@ export default function ProfilePage() {
 
                         <Card>
                             <div className="flex items-center justify-center h-40 text-gray-500 text-center">
-                                Klik op een categorie links om te zien wat Mera denkt dat jouw favoriet is.
+                                Klik op een categorie links om te zien wat Merai denkt dat jouw favoriet is.
                             </div>
                         </Card>
 

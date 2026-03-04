@@ -47,14 +47,14 @@ export default function AIBrainDashboard() {
         <div className="space-y-8">
 
             <h2 className="text-2xl font-semibold">
-                Mera's AI brein
+                Merai's AI brein
             </h2>
 
             <div className="grid grid-cols-3 gap-6">
 
                 <Card>
                     <h3 className="font-semibold mb-4">
-                        Wat Mera weet
+                        Wat Merai weet
                     </h3>
 
                     <div className="space-y-4">
@@ -69,7 +69,7 @@ export default function AIBrainDashboard() {
 
                 <Card>
                     <h3 className="font-semibold mb-4">
-                        Wat Mera denkt
+                        Wat Merai denkt
                     </h3>
 
                     <div className="space-y-4">
@@ -84,7 +84,7 @@ export default function AIBrainDashboard() {
 
                 <Card>
                     <h3 className="font-semibold mb-4">
-                        Waar Mera onzeker over is
+                        Waar Merai onzeker over is
                     </h3>
 
                     <div className="space-y-4">
