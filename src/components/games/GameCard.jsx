@@ -1,14 +1,14 @@
 import Button from "../ui/Button"
 
-export default function GameCard({ title, description }) {
+export default function GameCard({title, description}) {
     return (
         <div className="bg-white rounded-xl border p-5 flex flex-col gap-4">
 
-            <div className="h-28 bg-gray-100 rounded-md" />
+            <div className="h-28 bg-gray-100 rounded-md"/>
 
             <h3 className="font-semibold">{title}</h3>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm font-secondary text-gray-500">
                 {description}
             </p>
 
