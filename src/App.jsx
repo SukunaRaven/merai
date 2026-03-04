@@ -3,7 +3,7 @@ import Homepage from "./pages/Homepage.jsx";
 // import AccessibilityPage from "./pages/AccessibilityPage.jsx"
 // import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
 // import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
-// import DataManagement from "./pages/DataManagementPage.jsx"
+import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
 // import PrivacyPage from "./pages/PrivacyPage.jsx"
@@ -38,10 +38,10 @@ const router = createBrowserRouter([
             //     path: '/settings/accessibility',
             //     element: <AccessibilityPage/>
             // },
-            // {
-            //     path: '/settings/DataManagement',
-            //     element: <DataManagement/>
-            // },
+            {
+                path: '/settings/DataManagement',
+                element: <DataManagement/>
+            },
             // {
             //     path: '/settings/privacy',
             //     element: <PrivacyPage/>

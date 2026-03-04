@@ -1,11 +1,9 @@
-import Nav from "../components/layout/Nav.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import FamilyCard from "../components/profile/FamilyCard"
 
 function FamilyPage() {
     return (
         <div>
-            <Nav/>
             <AppLayout>
                 <main className="py-15 px-25">
                     <h1 className="text-3xl font-semibold font-primary text-black-blue mb-8">
