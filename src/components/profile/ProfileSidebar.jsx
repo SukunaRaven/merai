@@ -15,14 +15,15 @@ export default function ProfileSidebar({ onSelect }) {
 
             <div className="flex flex-col items-center mb-6">
 
-                <div className="w-24 h-24 rounded-full bg-[var(--color-primary)]" />
-
-                <p className="mt-3 font-semibold">
-                    Naam
-                </p>
+                {/* Profile image */}
+                <img
+                    src="/placeholder-avatar.png"
+                    alt="Profile"
+                    className="w-24 h-24 rounded-full object-cover"
+                />
 
                 <p className="text-sm text-gray-500">
-                    @Gebruikersnaam
+                    @Gebruikersnaam {/* DB: users.username */}
                 </p>
 
             </div>

@@ -4,12 +4,21 @@ export default function FavoriteDetail({ type }) {
 
     const mockData = {
         "Favoriete Eten": {
-            result: "Friet",
-            confidence: 82,
+            result: "Friet", // DB: user_preferences.favorite_food
+            confidence: 82, // DB: ai_predictions.food_confidence
             sources: [
-                { game: "Galgje", impact: 72 },
-                { game: "Memory", impact: 83 },
-                { game: "Zeg Wat Je Ziet", impact: 94 }
+                {
+                    game: "Galgje",
+                    impact: 72 // DB: game_results.galgje_score
+                },
+                {
+                    game: "Memory",
+                    impact: 83 // DB: game_results.memory_score
+                },
+                {
+                    game: "Zeg Wat Je Ziet",
+                    impact: 94 // DB: game_results.swys_score
+                }
             ]
         }
     }
@@ -31,7 +40,7 @@ export default function FavoriteDetail({ type }) {
                 Ik denk dat jouw favoriet is:
             </div>
 
-            <div className="text-3xl font-bold text-[var(--color-blue)]">
+            <div className="text-3xl font-bold text-blue">
                 {data.result}
             </div>
 
@@ -57,7 +66,7 @@ export default function FavoriteDetail({ type }) {
                         <div className="w-full h-2 bg-gray-200 rounded-full">
 
                             <div
-                                className="h-full bg-[var(--color-blue)] rounded-full"
+                                className="h-full bg-blue rounded-full"
                                 style={{ width: `${source.impact}%` }}
                             />
 
