@@ -2,6 +2,7 @@ import SettingsItem from "../components/ui/SettingsItem.jsx";
 // import Sidebar from "../components/layout/Sidebar.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 
+
 function SettingsPage() {
     return (
         <>
@@ -22,5 +23,6 @@ function SettingsPage() {
         </>
     )
 }
+
 
 export default SettingsPage;
