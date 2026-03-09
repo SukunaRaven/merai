@@ -2,7 +2,7 @@ import {createBrowserRouter, RouterProvider} from "react-router";
 import Homepage from "./pages/Homepage.jsx";
 import AccessibilityPage from "./pages/AccessibilityPage.jsx"
 // import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
-// import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
+import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
 import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
                 element: <Homepage/>
             },
             {
-                // path: '/attitudetest',
-                // element: <AttitudeTestPage/>
+                path: '/attitudetest',
+                element: <AttitudeTestPage/>
             },
             {
                 path: '/profile',
