@@ -16,6 +16,7 @@
 }
 :root {
     --main-font-size: 16px;
+    --colorblind-filter: none;
 }
 
 body {
@@ -23,4 +24,20 @@ body {
     font-size: var(--main-font-size);
     background: var(--color-white-blue);
     color: var(--color-black-blue);
+}
+
+html {
+    filter: var(--colorblind-filter);
+}
+
+html.mode-protanopia {
+    --colorblind-filter: url('#protanopia') sepia(0.5) hue-rotate(-30deg) saturate(1.2);
+}
+
+html.mode-deuteranopia {
+    --colorblind-filter: url('#protanopia') sepia(0.5) hue-rotate(30deg) saturate(1.2);
+}
+
+html.mode-grayscale {
+    --colorblind-filter: grayscale(100%);
 }
