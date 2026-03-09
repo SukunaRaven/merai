@@ -1,0 +1,82 @@
+import AppLayout from "../components/layout/AppLayout.jsx";
+import { Link } from "react-router";
+import { useState, useEffect } from "react";
+
+const getSavedSize = () => {
+    const saved = localStorage.getItem('user-font-size');
+    return saved ? parseInt(saved, 10) : 16;
+};
+const getSavedColorMode = () => {
+    return localStorage.getItem('user-color-mode') || 'none';
+};
+
+function AccessibilityPage() {
+    const [size, setSize] = useState(() => getSavedSize());
+    const [colorMode, setColorMode] = useState(() => getSavedColorMode());
+
+    useEffect(() => {
+        const root = document.documentElement;
+
+        // Remove all possible colorblind classes before adding the new one
+        root.classList.remove('mode-protanopia', 'mode-deuteranopia', 'mode-tritanopia', 'mode-achromatopsia');
+
+        if (colorMode !== 'none') {
+            root.classList.add(`mode-${colorMode}`);
+        }
+    }, [colorMode]);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--main-font-size', `${size}px`);
+    }, [size]);
+
+    const handleSizeChange = (event) => {
+        const newSize = parseInt(event.target.value, 10);
+        setSize(newSize);
+        localStorage.setItem('user-font-size', newSize);
+    };
+
+    const handleColorChange = (event) => {
+        const newMode = event.target.value;
+        setColorMode(newMode);
+        localStorage.setItem('user-color-mode', newMode);
+    };
+
+    return (
+        <AppLayout>
+            <article className="p-6 rounded-3xl border max-w-7xl mx-auto mt-10 flex flex-row gap-16">
+                <Link to={`/settings`} className="flex justify-between items-center py-4">
+                    Terug
+                </Link>
+                <section className="flex flex-col w-full">
+                    {/* Language Select (Placeholder logic) */}
+                    <label htmlFor="language-select" className="mb-2 mt-2">Taal aanpassen:</label>
+                    <select id="language-select" className="p-2 border mb-2 rounded-lg">
+                        <option value="dutch">Nederlands</option>
+                        <option value="english">English</option>
+                    </select>
+
+                    {/* Font Size Select */}
+                    <label htmlFor="font-size-select" className="mb-2 mt-2">Lettergrootte aanpassen:</label>
+                    <select id="font-size-select" value={size} onChange={handleSizeChange} className="p-2 border rounded-lg">
+                        <option value="12">Kleiner (12px)</option>
+                        <option value="16">Standaard (16px)</option>
+                        <option value="20">Groter (20px)</option>
+                        <option value="24">Extra groot (24px)</option>
+                    </select>
+
+                    {/* Colorblind Mode Select */}
+                    <label htmlFor="color-mode-select" className="mb-2 mt-2">Kleurenblind modus:</label>
+                    <select id="color-mode-select" value={colorMode} onChange={handleColorChange} className="p-2 border rounded-lg">
+                        <option value="none">Geen (Standaard)</option>
+                        <option value="achromatopsia">Achromatopsie (Zwart/Wit)</option>
+                        <option value="protanopia">Protanopie (Rood-zwak)</option>
+                        <option value="deuteranopia">Deuteranopie (Groen-zwak)</option>
+                        <option value="tritanopia">Tritanopie (Blauw-zwak)</option>
+                    </select>
+                </section>
+            </article>
+        </AppLayout>
+    );
+}
+
+export default AccessibilityPage;

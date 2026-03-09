@@ -1,34 +1,69 @@
-import {useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {createBrowserRouter, RouterProvider} from "react-router";
+import Homepage from "./pages/Homepage.jsx";
+import AccessibilityPage from "./pages/AccessibilityPage.jsx"
+// import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
+import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
+import DataManagement from "./pages/DataManagementPage.jsx"
+import FamilyPage from "./pages/FamilyPage.jsx"
+import MinigamesPage from "./pages/MinigamesPage.jsx";
+import PrivacyPage from "./pages/PrivacyPage.jsx"
+// import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
+import ProfilePage from "./pages/ProfilePage.jsx"
+import SettingsPage from "./pages/SettingsPage.jsx"
+
+const router = createBrowserRouter([
+    {
+        children: [
+            {
+                path: '/',
+                element: <Homepage/>
+            },
+            {
+                path: '/attitudetest',
+                element: <AttitudeTestPage/>
+            },
+            {
+                path: '/profile',
+                element: <ProfilePage/>
+            },
+            {
+                path: '/settings',
+                element: <SettingsPage/>
+            },
+            {
+                // path: '/settings/profileadjust',
+                // element: <ProfileAdjustPage/>
+            },
+            {
+                path: '/settings/accessibility',
+                element: <AccessibilityPage/>
+            },
+            {
+                path: '/settings/DataManagement',
+                element: <DataManagement/>
+            },
+            {
+                path: '/settings/privacy',
+                element: <PrivacyPage/>
+            },
+            {
+                path: '/settings/family',
+                element: <FamilyPage/>
+            },
+            {
+                // path: '/tipsandtricks',
+                // element: <AiTipsAndTricksPage/>
+            },
+            {
+                path: '/minigames',
+                element: <MinigamesPage/>
+            },
+        ]
+    }
+]);
 
 function App() {
-    const [count, setCount] = useState(0)
-
-    return (
-        <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo"/>
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo"/>
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
-    )
+    return <RouterProvider router={router}/>;
 }
 
 export default App
