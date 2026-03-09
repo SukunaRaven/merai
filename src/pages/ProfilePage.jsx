@@ -4,7 +4,6 @@ import AppLayout from "../components/layout/AppLayout"
 import ProfileSidebar from "../components/profile/ProfileSidebar"
 import FavoriteDetail from "../components/profile/FavoriteDetail"
 import Card from "../components/ui/Card"
-import Nav from "../components/layout/Nav"
 
 export default function ProfilePage() {
 
@@ -13,8 +12,6 @@ export default function ProfilePage() {
     return (
 
         <AppLayout>
-
-            <Nav />
 
             <div className="flex gap-8">
 
