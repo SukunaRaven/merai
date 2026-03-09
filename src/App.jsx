@@ -1,13 +1,13 @@
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Homepage from "./pages/Homepage.jsx";
 import AccessibilityPage from "./pages/AccessibilityPage.jsx"
-import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
-import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
+// import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
+// import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
 import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
-import PrivacyPage from "./pages/PrivacyPage.jsx"
-import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
+// import PrivacyPage from "./pages/PrivacyPage.jsx"
+// import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
 
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
                 element: <Homepage/>
             },
             {
-                path: '/attitudetest',
-                element: <AttitudeTestPage/>
+                // path: '/attitudetest',
+                // element: <AttitudeTestPage/>
             },
             {
                 path: '/profile',
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
                 element: <SettingsPage/>
             },
             {
-                path: '/settings/profileadjust',
-                element: <ProfileAdjustPage/>
+                // path: '/settings/profileadjust',
+                // element: <ProfileAdjustPage/>
             },
             {
                 path: '/settings/accessibility',
@@ -43,16 +43,16 @@ const router = createBrowserRouter([
                 element: <DataManagement/>
             },
             {
-                path: '/settings/privacy',
-                element: <PrivacyPage/>
+                // path: '/settings/privacy',
+                // element: <PrivacyPage/>
             },
             {
                 path: '/settings/family',
                 element: <FamilyPage/>
             },
             {
-                path: '/tipsandtricks',
-                element: <AiTipsAndTricksPage/>
+                // path: '/tipsandtricks',
+                // element: <AiTipsAndTricksPage/>
             },
             {
                 path: '/minigames',
