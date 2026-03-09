@@ -6,7 +6,7 @@ import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
 import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
-// import PrivacyPage from "./pages/PrivacyPage.jsx"
+import PrivacyPage from "./pages/PrivacyPage.jsx"
 // import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
                 element: <DataManagement/>
             },
             {
-                // path: '/settings/privacy',
-                // element: <PrivacyPage/>
+                path: '/settings/privacy',
+                element: <PrivacyPage/>
             },
             {
                 path: '/settings/family',
