@@ -1,43 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-    /* colors */
+    /* DEFAULT COLORS */
     --color-primary: #7FD4E7;
     --color-blue-light: #858AE3;
     --color-blue: #613DC1;
     --color-blue-dark: #4E148C;
     --color-black-blue: #2C0735;
     --color-white-blue: #E9F4F6;
-
-    /* fonts */
-    --font-primary: "IBM Plex Sans", sans-serif;
-    --font-secondary: "M PLUS 1", sans-serif;
-
 }
+
 :root {
     --main-font-size: 16px;
-    --colorblind-filter: none;
+}
+
+/* The Fix: Use class selectors (.mode-...) to match your
+   JS logic (root.classList.add(`mode-${colorMode}`))
+*/
+
+/* Deuteranopia */
+.mode-deuteranopia {
+    --color-primary: #87CEEB;
+    --color-blue-light: #B0C4DE;
+    --color-blue: #4682B4;
+    --color-blue-dark: #000080;
+    --color-black-blue: #000033;
+    --color-white-blue: #F0F8FF;
+}
+
+/* Protanopia (Commonly similar to Deuteranopia, adjusted slightly) */
+.mode-protanopia {
+    --color-primary: #91D0E0;
+    --color-blue-light: #9BA1E8;
+    --color-blue: #5840A3;
+    --color-blue-dark: #3A1866;
+}
+
+/* Tritanopia */
+.mode-tritanopia {
+    --color-primary: #94E5D4;
+    --color-blue-light: #FFB6C1;
+    --color-blue: #DC143C;
+    --color-blue-dark: #8B0000;
+    --color-black-blue: #1A0000;
+    --color-white-blue: #FFF5F5;
+}
+
+/* Achromatopsia / Grayscale */
+.mode-achromatopsia, .mode-grayscale {
+    --color-primary: #CCCCCC;
+    --color-blue-light: #AAAAAA;
+    --color-blue: #666666;
+    --color-blue-dark: #333333;
+    --color-black-blue: #000000;
+    --color-white-blue: #FFFFFF;
 }
 
 body {
-    font-family: var(--font-primary);
+    /* Using var(--font-primary) - make sure this is defined in your theme */
     font-size: var(--main-font-size);
     background: var(--color-white-blue);
     color: var(--color-black-blue);
-}
-
-html {
-    filter: var(--colorblind-filter);
-}
-
-html.mode-protanopia {
-    --colorblind-filter: url('#protanopia') sepia(0.5) hue-rotate(-30deg) saturate(1.2);
-}
-
-html.mode-deuteranopia {
-    --colorblind-filter: url('#protanopia') sepia(0.5) hue-rotate(30deg) saturate(1.2);
-}
-
-html.mode-grayscale {
-    --colorblind-filter: grayscale(100%);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
