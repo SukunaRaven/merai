@@ -1,3 +1,5 @@
+import Nav from "./Nav.jsx";
+
 export default function AppLayout({ children }) {
     return (
         <div className="flex h-screen bg-white-blue">

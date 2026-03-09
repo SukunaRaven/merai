@@ -35,7 +35,7 @@ export default function ProfileSidebar({ onSelect }) {
                     <button
                         key={item}
                         onClick={() => onSelect(item)}
-                        className="w-full text-left px-3 py-2 rounded-lg hover:bg-white-blue"
+                        className="w-full text-left px-3 py-2 rounded-lg hover:bg-blue-light"
                     >
                         {item}
                     </button>
