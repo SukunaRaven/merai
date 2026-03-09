@@ -14,6 +14,10 @@ function Nav() {
                     <div className="hidden md:flex items-center gap-6">
                         <Link to="/profile"
                               className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Profiel</Link>
+                        <Link to="/login"
+                              className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Login</Link>
+                        <Link to="/create"
+                              className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Registreer</Link>
                         <Link to="/settings"
                               className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Instellingen</Link>
                     </div>

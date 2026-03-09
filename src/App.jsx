@@ -10,6 +10,8 @@ import PrivacyPage from "./pages/PrivacyPage.jsx"
 // import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
+import CreateAccountPage from "./pages/CreateAccountPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
             {
                 path: '/minigames',
                 element: <MinigamesPage/>
+            },
+            {
+                path: '/create',
+                element: <CreateAccountPage/>
+            },
+            {
+                path: '/login',
+                element: <LoginPage/>
             },
         ]
     }
