@@ -1,21 +1,24 @@
-// import Sidebar from "../components/layout/Sidebar.jsx";
+//  import Sidebar from "../components/layout/Sidebar.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import {Link} from "react-router";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 const getSavedSize = () => {
     const saved = localStorage.getItem('user-font-size');
-    return saved ? parseInt(saved) : 16;
+    return saved ? parseInt(saved, 10) : 16;
 };
 
 function AccessibilityPage() {
-    const [size, setSize] = useState(getSavedSize);
+    const [size, setSize] = useState(() => getSavedSize());
+    useEffect(() => {
+        document.documentElement.style.setProperty('--main-font-size', `${size}px`);
+    }, [size]);
     const handleSizeChange = (event) => {
-        const newSize = parseInt(event.target.value);
+        const newSize = parseInt(event.target.value, 10);
         setSize(newSize);
-        document.documentElement.style.setProperty('--main-font-size', `${newSize}px`);
         localStorage.setItem('user-font-size', newSize);
     };
+
     return (
         <>
             <AppLayout>
@@ -55,6 +58,5 @@ function AccessibilityPage() {
         </>
     )
 }
-
 
 export default AccessibilityPage;
