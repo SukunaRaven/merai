@@ -1,77 +1,106 @@
 import Nav from "../components/layout/Nav.jsx";
-import {Link} from "react-router";
 import {useState} from "react";
+import {useNavigate} from "react-router";
 
 function CreateAccountPage() {
-    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: ''
+    });
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleRegister = async (e) => {
         e.preventDefault();
-        // Here you would typically handle the data submission
-        setShowModal(true);
+
+        try {
+            const response = await fetch('http://145.24.237.168:8000/users', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                console.log("Account succesvol aangemaakt!", data);
+                alert("Account aangemaakt! Je kunt nu inloggen.");
+                navigate("/login");
+            } else {
+                console.log("Registratie mislukt:", data.message);
+            }
+        } catch (e) {
+            console.log("Netwerkfout:", e);
+        }
     };
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
             <Nav/>
             <main className="py-15 px-25">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4 p-4">
+                <form onSubmit={handleRegister}
+                      className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
+                    <h1 className="text-black-blue font-bold font-primary text-2xl">Maak account aan</h1>
                     <div className="flex flex-col">
-                        <label htmlFor="username" className="text-black-blue font-semibold">Username:</label>
+                        <label htmlFor="username" className="text-black-blue font-semibold">Gebruikersnaam:</label>
                         <input type="text"
                                id="username"
-                               name="username"
-                               className="border p-1"/>
+                               name="username" // Moet exact matchen met de key in formData
+                               value={formData.username}
+                               onChange={handleChange}
+                               className="border p-1"
+                               required/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="email" className="text-black-blue font-semibold">Email:</label>
                         <input type="text"
                                id="email"
                                name="email"
-                               className="border p-1"/>
+                               value={formData.email}
+                               onChange={handleChange}
+                               className="border p-1"
+                               required/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="password" className="text-black-blue font-semibold">Wachtwoord:</label>
-                        <input type="text"
+                        <input type="password"
                                id="password"
                                name="password"
-                               className="border p-1"/>
+                               value={formData.password}
+                               onChange={handleChange}
+                               className="border p-1"
+                               required/>
                     </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="role" className="text-black-blue font-semibold">Rol:</label>
-                        <input type="text"
-                               id="role"
-                               name="role"
-                               className="border p-1"/>
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="language" className="text-black-blue font-semibold">Taal:</label>
-                        <input type="text"
-                               id="language"
-                               name="language"
-                               className="border p-1"/>
-                    </div>
+                    {/*<div className="flex flex-col">*/}
+                    {/*    <label htmlFor="role" className="text-black-blue font-semibold">Rol:</label>*/}
+                    {/*    <input type="text"*/}
+                    {/*           id="role"*/}
+                    {/*           name="role"*/}
+                    {/*           className="border p-1"/>*/}
+                    {/*</div>*/}
+                    {/*<div className="flex flex-col">*/}
+                    {/*    <label htmlFor="language" className="text-black-blue font-semibold">Taal:</label>*/}
+                    {/*    <input type="text"*/}
+                    {/*           id="language"*/}
+                    {/*           name="language"*/}
+                    {/*           className="border p-1"/>*/}
+                    {/*</div>*/}
 
                     <button type="submit"
                             className="rounded bg-blue text-white-blue p-2 mt-4 cursor-pointer hover:bg-blue/90">Verzenden
                     </button>
                 </form>
             </main>
-
-            {showModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
-                        <h2 className="text-2xl font-bold mb-4 text-blue">Bedankt!</h2>
-                        <p className="mb-6 text-gray-600">Je antwoorden zijn succesvol verzonden.</p>
-                        <Link
-                            to="/"
-                            className="inline-block bg-blue-light text-black-blue px-6 py-2 rounded hover:bg-primary/90 transition-colors"
-                        >
-                            Terug naar Home
-                        </Link>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
