@@ -1,4 +1,3 @@
-//  import Sidebar from "../components/layout/Sidebar.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
