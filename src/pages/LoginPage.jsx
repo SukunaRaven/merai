@@ -50,7 +50,7 @@ function LoginPage() {
                                name="username"
                                value={credentials.username}
                                onChange={handleChange}
-                               className="border p-1"
+                               className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
                     <div className="flex flex-col">
@@ -60,7 +60,7 @@ function LoginPage() {
                                name="password"
                                value={credentials.password}
                                onChange={handleChange}
-                               className="border p-1"
+                               className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
 
