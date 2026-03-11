@@ -8,6 +8,9 @@
     --color-blue-dark: #4E148C;
     --color-black-blue: #2C0735;
     --color-white-blue: #E9F4F6;
+
+    --font-primary: "IBM Plex Sans", sans-serif;
+    --font-secondary: "M PLUS 1", sans-serif;
 }
 
 :root {
