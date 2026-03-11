@@ -1,6 +1,7 @@
 import Nav from "../components/layout/Nav.jsx";
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import { createUser } from "../fetches/UserFetch.jsx"; // Import the createUser function
 
 function CreateAccountPage() {
     const [formData, setFormData] = useState({
@@ -22,25 +23,14 @@ function CreateAccountPage() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://145.24.237.168:8000/users', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                console.log("Account succesvol aangemaakt!", data);
-                alert("Account aangemaakt! Je kunt nu inloggen.");
-                navigate("/login");
-            } else {
-                console.log("Registratie mislukt:", data.message);
-            }
-        } catch (e) {
-            console.log("Netwerkfout:", e);
+            const data = await createUser(formData); // Use the centralized createUser function
+            
+            console.log("Account succesvol aangemaakt!", data);
+            alert("Account aangemaakt! Je kunt nu inloggen.");
+            navigate("/login");
+        } catch (error) {
+            console.error("Registratie mislukt:", error);
+            alert("Registratie mislukt: " + error.message);
         }
     };
 

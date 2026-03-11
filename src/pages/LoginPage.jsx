@@ -1,6 +1,7 @@
 import Nav from "../components/layout/Nav.jsx";
 import {useNavigate} from "react-router";
 import {useState} from "react";
+import {loginUser} from "../fetches/UserFetch.jsx"; // Import the loginUser function
 
 function LoginPage() {
     const [credentials, setCredentials] = useState({
@@ -18,28 +19,20 @@ function LoginPage() {
     };
 
     const handleLogin = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         try {
-            const result = await fetch('http://145.24.237.168:8000/users', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(credentials)
-            });
+            const data = await loginUser(credentials); // Use the centralized loginUser function
 
-            const data = await result.json();
-            if (result.ok) {
-                console.log("Login succesvol!", data);
-                alert("Welkom terug!");
-                navigate("/");
-            } else {
-                alert("Login mislukt: " + (data.message || "Onbekende fout"));
-            }
-        } catch (e) {
-            console.log("Netwerkfout:", e);
+            // Assuming loginUser throws an error if response.ok is false
+            localStorage.setItem('authToken', data.token);
+
+            console.log("Login succesvol!", data);
+            alert("Welkom terug!");
+            navigate("/");
+        } catch (error) {
+            console.error("Login mislukt:", error);
+            alert("Login mislukt: " + error.message);
         }
     };
 
