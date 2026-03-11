@@ -1,8 +1,31 @@
-import {Link} from "react-router";
-import GameCard from "../components/games/GameCard"
+import {useEffect, useState} from "react";
+import GameCard from "../components/games/GameCard";
 import Nav from "../components/layout/Nav.jsx";
+import {fetchMinigames} from "../fetches/MinigameFetch.jsx";
 
 export default function MinigamesPage() {
+    const [minigames, setMinigames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getMinigames = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchMinigames();
+                setMinigames(data);
+                setError(null);
+            } catch (error) {
+                setError(error.message);
+                console.error("Failed to fetch minigames:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getMinigames();
+    }, []); // Empty dependency array means this runs once on mount
+
     return (
         <div>
             <Nav/>
@@ -11,25 +34,21 @@ export default function MinigamesPage() {
                     Minigames
                 </h1>
 
-                <div className="grid grid-cols-2 gap-6">
+                {loading && <p>Loading games...</p>}
+                {error && <p className="text-red-500">Error: {error}</p>}
 
-                    <GameCard
-                        title="Galgje"
-                        description="Detect AI patronen"
-                    />
-
-                    <GameCard
-                        title="Memory"
-                        description="Match AI gegenereerde beelden"
-                    />
-
-                    <GameCard
-                        title="SWYS"
-                        description="Spot What You See"
-                    />
-
-                </div>
+                {!loading && !error && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {minigames.map((game) => (
+                            <GameCard
+                                key={game._id}
+                                title={game.name}
+                                description={game.description}
+                            />
+                        ))}
+                    </div>
+                )}
             </main>
         </div>
-    )
+    );
 }
