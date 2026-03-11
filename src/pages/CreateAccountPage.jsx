@@ -47,7 +47,7 @@ function CreateAccountPage() {
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
             <Nav/>
-            <main className="py-15 px-25">
+            <main className="py-15 px-50">
                 <form onSubmit={handleRegister}
                       className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Maak account aan</h1>
