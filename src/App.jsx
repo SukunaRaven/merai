@@ -1,7 +1,7 @@
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Homepage from "./pages/Homepage.jsx";
 import AccessibilityPage from "./pages/AccessibilityPage.jsx"
-// import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
+import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
 import AttitudeTestPage from "./pages/AttitudeTestPage.jsx"
 import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
                 element: <FamilyPage/>
             },
             {
-                // path: '/tipsandtricks',
-                // element: <AiTipsAndTricksPage/>
+                path: '/tipsandtricks',
+                element: <AiTipsAndTricksPage/>
             },
             {
                 path: '/minigames',
