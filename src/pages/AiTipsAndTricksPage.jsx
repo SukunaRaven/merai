@@ -4,7 +4,7 @@ function AiTipsAndTricksPage() {
     return (
         <div className="bg-white-blue">
             <Nav/>
-            <h1 className="text-black-blue font-bold text-center font-primary text-3xl mt-10 -mb-5">AI Tips And
+            <h1 className="text-black-blue font-bold text-center font-primary text-3xl mt-10 -mb-5">AI Tips en
                 Tricks</h1>
             <main className="py-15 px-25">
                 <div className="flex justify-between font-secondary gap-10 ">
