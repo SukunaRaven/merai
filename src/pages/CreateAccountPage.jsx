@@ -58,7 +58,7 @@ function CreateAccountPage() {
                                name="username" // Moet exact matchen met de key in formData
                                value={formData.username}
                                onChange={handleChange}
-                               className="border p-1"
+                               className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
                     <div className="flex flex-col">
@@ -68,7 +68,7 @@ function CreateAccountPage() {
                                name="email"
                                value={formData.email}
                                onChange={handleChange}
-                               className="border p-1"
+                               className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
                     <div className="flex flex-col">
@@ -78,7 +78,7 @@ function CreateAccountPage() {
                                name="password"
                                value={formData.password}
                                onChange={handleChange}
-                               className="border p-1"
+                               className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
                     {/*<div className="flex flex-col">*/}
@@ -86,14 +86,14 @@ function CreateAccountPage() {
                     {/*    <input type="text"*/}
                     {/*           id="role"*/}
                     {/*           name="role"*/}
-                    {/*           className="border p-1"/>*/}
+                    {/*           className="border p-1 border-gray-400 rounded"/>*/}
                     {/*</div>*/}
                     {/*<div className="flex flex-col">*/}
                     {/*    <label htmlFor="language" className="text-black-blue font-semibold">Taal:</label>*/}
                     {/*    <input type="text"*/}
                     {/*           id="language"*/}
                     {/*           name="language"*/}
-                    {/*           className="border p-1"/>*/}
+                    {/*           className="border p-1 border-gray-400 rounded"/>*/}
                     {/*</div>*/}
 
                     <button type="submit"
