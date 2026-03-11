@@ -20,6 +20,10 @@ function Homepage() {
                           className="flex-1 bg-blue text-white-blue text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">
                         Profiel
                     </Link>
+                    <Link to={`/tipsandtricks`}
+                          className="flex-1 bg-blue text-white-blue text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">
+                        AI Tips en Tricks
+                    </Link>
                     <Link to={`/minigames`}
                           className="flex-1 bg-blue text-white-blue text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">
                         Minigames
