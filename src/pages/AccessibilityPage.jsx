@@ -1,3 +1,4 @@
+//  import Sidebar from "../components/layout/Sidebar.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
@@ -22,6 +23,14 @@ function AccessibilityPage() {
 
         if (colorMode !== 'none') {
             root.classList.add(`mode-${colorMode}`);
+
+            if (colorMode === 'grayscale') {
+                root.style.setProperty('--colorblind-filter', 'grayscale(100%)');
+            } else {
+                root.style.removeProperty('--colorblind-filter');
+            }
+        } else {
+            root.style.setProperty('--colorblind-filter', 'none');
         }
     }, [colorMode]);
 
@@ -42,41 +51,42 @@ function AccessibilityPage() {
     };
 
     return (
-        <AppLayout>
-            <article className="p-6 rounded-3xl border max-w-7xl mx-auto mt-10 flex flex-row gap-16">
-                <Link to={`/settings`} className="flex justify-between items-center py-4">
-                    Terug
-                </Link>
-                <section className="flex flex-col w-full">
-                    {/* Language Select (Placeholder logic) */}
-                    <label htmlFor="language-select" className="mb-2 mt-2">Taal aanpassen:</label>
-                    <select id="language-select" className="p-2 border mb-2 rounded-lg">
-                        <option value="dutch">Nederlands</option>
-                        <option value="english">English</option>
-                    </select>
-
-                    {/* Font Size Select */}
-                    <label htmlFor="font-size-select" className="mb-2 mt-2">Lettergrootte aanpassen:</label>
-                    <select id="font-size-select" value={size} onChange={handleSizeChange} className="p-2 border rounded-lg">
-                        <option value="12">Kleiner (12px)</option>
-                        <option value="16">Standaard (16px)</option>
-                        <option value="20">Groter (20px)</option>
-                        <option value="24">Extra groot (24px)</option>
-                    </select>
-
-                    {/* Colorblind Mode Select */}
-                    <label htmlFor="color-mode-select" className="mb-2 mt-2">Kleurenblind modus:</label>
-                    <select id="color-mode-select" value={colorMode} onChange={handleColorChange} className="p-2 border rounded-lg">
-                        <option value="none">Geen (Standaard)</option>
-                        <option value="achromatopsia">Achromatopsie (Zwart/Wit)</option>
-                        <option value="protanopia">Protanopie (Rood-zwak)</option>
-                        <option value="deuteranopia">Deuteranopie (Groen-zwak)</option>
-                        <option value="tritanopia">Tritanopie (Blauw-zwak)</option>
-                    </select>
-                </section>
-            </article>
-        </AppLayout>
-    );
+        <>
+            <AppLayout>
+                <article
+                    className="p-6 rounded-3xl border max-w-7xl mx-auto mt-10 flex flex-row gap-16">
+                    <Link to={`/settings`}
+                          className="flex justify-between items-center py-4">Terug
+                    </Link>
+                    <section className="flex flex-col w-full">
+                        <label htmlFor="font-size-select" className="mb-2 mt-2">
+                            Lettergrootte aanpassen:
+                        </label>
+                        <select id="font-size-select"
+                                value={size}
+                                onChange={handleSizeChange}
+                                className="p-2 border rounded-lg">
+                            <option value="12">Kleiner (12px)</option>
+                            <option value="16">Standaard (16px)</option>
+                            <option value="20">Groter (20px)</option>
+                            <option value="24">Extra groot (24px)</option>
+                        </select>
+                        <label htmlFor="color-mode-select" className="mb-2 mt-2">Kleurenblind modus:</label>
+                        <select
+                            id="color-mode-select"
+                            value={colorMode}
+                            onChange={handleColorChange}
+                            className="p-2 border rounded-lg">
+                            <option value="none">Geen (Standaard)</option>
+                            <option value="grayscale">Hoog contrast (Zwart/Wit)</option>
+                            <option value="protanopia">Protanopie (Rood-zwak)</option>
+                            <option value="deuteranopia">Deuteranopie (Groen-zwak)</option>
+                        </select>
+                    </section>
+                </article>
+            </AppLayout>
+        </>
+    )
 }
 
 export default AccessibilityPage;
