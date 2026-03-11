@@ -7,12 +7,15 @@ import DataManagement from "./pages/DataManagementPage.jsx"
 import FamilyPage from "./pages/FamilyPage.jsx"
 import MinigamesPage from "./pages/MinigamesPage.jsx";
 import PrivacyPage from "./pages/PrivacyPage.jsx"
+import AdminPage from "./pages/AdminPage.jsx"
+import MyProfileInsight from "./pages/MyProfileInsight.jsx"
 // import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import HangmanGamePage from "./pages/HangmanGamePage.jsx";
+import AdminDashboard from "./pages/AdminPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +23,14 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Homepage/>
+            },
+            {
+                path: '/profileinsight',
+                element: <MyProfileInsight/>
+            },
+            {
+                path: '/admin',
+                element: <AdminPage/>
             },
             {
                 path: '/attitudetest',
