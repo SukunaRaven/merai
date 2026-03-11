@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import GameCard from "../components/games/GameCard";
 import Nav from "../components/layout/Nav.jsx";
 import {fetchMinigames} from "../fetches/MinigameFetch.jsx";
+import SettingsItem from "../components/ui/SettingsItem.jsx";
 
 export default function MinigamesPage() {
     const [minigames, setMinigames] = useState([]);
@@ -44,7 +45,7 @@ export default function MinigamesPage() {
                                 key={game._id}
                                 title={game.name}
                                 description={game.description}
-                            />
+                                to="/minigames/hangman"/>
                         ))}
                     </div>
                 )}

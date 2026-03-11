@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import HangmanGamePage from "./pages/HangmanGamePage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: '/minigames',
                 element: <MinigamesPage/>
+            },
+            {
+                path: '/minigames/hangman',
+                element: <HangmanGamePage/>
             },
             {
                 path: '/create',
