@@ -1,7 +1,7 @@
 const API_URL = 'http://145.24.237.168:8000';
 
 export const fetchMinigameSessions = async (minigame_id, user_id) => {
-    const response = await fetch(`${API_URL}/minigame_sessions`, {
+    const response = await fetch(`${API_URL}/minigame-sessions`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -19,7 +19,7 @@ export const fetchMinigameSessions = async (minigame_id, user_id) => {
 };
 
 export const fetchMinigameSessionById = async (id) => {
-    const response = await fetch(`${API_URL}/minigame_sessions/${id}`, {
+    const response = await fetch(`${API_URL}/minigame-sessions/${id}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -36,7 +36,7 @@ export const fetchMinigameSessionById = async (id) => {
 };
 
 export const submitGuess = async (id, guessData) => {
-    const response = await fetch(`${API_URL}/minigame_sessions/${id}/guess`, {
+    const response = await fetch(`${API_URL}/minigame-sessions/${id}/guess`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
