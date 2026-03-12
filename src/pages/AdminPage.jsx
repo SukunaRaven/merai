@@ -1,78 +1,67 @@
 import React, { useState } from 'react';
-import { ModuleListItem } from '../components/admin/ModuleListItem';
-import { AnalyticsSummary } from '../components/admin/AnalyticsSummary';
+import { UserTable } from '../components/admin/UserTable';
+import { AccuracyStats } from '../components/admin/AccuracyStats';
 import AppLayout from "../components/layout/AppLayout.jsx";
 
 const AdminDashboard = () => {
-    const [activeTab, setActiveTab] = useState('stats'); // 'stats' of 'modules'
+    const [activeTab, setActiveTab] = useState('stats');
+
+    // Dummy data voor frontend weergave
+    const dummyUsers = [
+        { id: "USR-9283", role: "Tiener", interests: ["Gaming", "AI"], confidence: 85 },
+        { id: "USR-1102", role: "Ouder", interests: ["Privacy", "Beheer"], confidence: 92 },
+        { id: "USR-4432", role: "Tiener", interests: ["Mode", "TikTok"], confidence: 45 },
+    ];
 
     return (
         <AppLayout>
-            <div className="min-h-screen bg-white-blue p-6 md:p-12 font-primary">
-
-                <header className="mb-10 flex justify-between items-end">
+            <div className="min-h-screen bg-white-blue p-8 font-primary">
+                <header className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                     <div>
-                        <h1 className="text-4xl font-secondary font-bold text-blue-dark">Beheerderspaneel</h1>
-                        <p className="text-blue">Optimaliseer de leerervaring voor Merai-gebruikers.</p>
+                        <h1 className="text-4xl font-secondary font-bold text-blue-dark">Admin Control</h1>
+                        <p className="text-blue font-bold">Monitor de AI-nauwkeurigheid en gebruikersprofielen.</p>
                     </div>
-                    <nav className="flex gap-2 bg-blue-light/10 p-1 rounded-xl">
+
+                    <nav className="inline-flex bg-white p-1 rounded-2xl shadow-inner border border-blue-light/20">
                         <button
                             onClick={() => setActiveTab('stats')}
-                            className={`px-6 py-2 rounded-lg font-bold transition ${activeTab === 'stats' ? 'bg-blue text-white' : 'text-blue-dark'}`}
+                            className={`px-6 py-2 rounded-xl font-bold transition ${activeTab === 'stats' ? 'bg-blue text-white' : 'text-blue-dark hover:bg-blue-light/10'}`}
                         >
-                            Statistieken
+                            Foutmarges
                         </button>
                         <button
-                            onClick={() => setActiveTab('modules')}
-                            className={`px-6 py-2 rounded-lg font-bold transition ${activeTab === 'modules' ? 'bg-blue text-white' : 'text-blue-dark'}`}
+                            onClick={() => setActiveTab('users')}
+                            className={`px-6 py-2 rounded-xl font-bold transition ${activeTab === 'users' ? 'bg-blue text-white' : 'text-blue-dark hover:bg-blue-light/10'}`}
                         >
-                            Modules
+                            Gebruikers
                         </button>
                     </nav>
                 </header>
 
                 {activeTab === 'stats' ? (
-                    <section className="animate-in fade-in duration-500">
-                        <div className="flex gap-4 mb-6">
-                            <select className="p-2 rounded-lg border-2 border-blue-light bg-white outline-none focus:border-blue">
-                                <option>Leeftijd: Alle</option>
-                                <option>16-18 jaar</option>
-                                <option>52-56 jaar</option>
-                            </select>
+                    <div className="animate-in fade-in duration-500">
+                        <h2 className="text-xl font-bold mb-6 text-blue-dark">AI Voorspellingsfouten</h2>
+                        <AccuracyStats />
+                        <div className="bg-blue-dark p-8 rounded-3xl text-white">
+                            <h3 className="font-secondary font-bold mb-2">Waarom deze data?</h3>
+                            <p className="text-sm opacity-80 leading-relaxed">
+                                Deze statistieken komen direct voort uit de "Duimpje omlaag" feedback van tieners.
+                                Een hoge foutmarge in een categorie betekent dat het AI-model daar te bevooroordeeld is (stereotypes).
+                            </p>
                         </div>
-
-                        <AnalyticsSummary />
-
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-light/30">
-                            <h2 className="text-xl font-secondary font-bold mb-4">Foutieve Aannames per Vraag</h2>
-                            {/* Hier zou een tabel of chart komen */}
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4">
-                                    <span className="w-32 text-sm font-bold">Vraag 1.2</span>
-                                    <div className="flex-1 bg-gray-100 h-4 rounded-full overflow-hidden">
-                                        <div className="bg-blue h-full" style={{ width: '65%' }}></div>
-                                    </div>
-                                    <span className="text-sm font-bold text-blue">65% Fout</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    </div>
                 ) : (
-                    <section className="animate-in slide-in-from-bottom-4 duration-500">
+                    <div className="animate-in slide-in-from-bottom-4 duration-500">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-secondary font-bold text-blue-dark">Leermodules</h2>
-                            <button className="bg-primary text-blue-dark px-6 py-2 rounded-full font-bold hover:brightness-95 transition">
-                                + Nieuwe Module
-                            </button>
-                        </div>
-                        <div className="grid gap-2">
-                            {/* Map hier over je modules vanuit de backend */}
-                            <ModuleListItem
-                                module={{id: 1, title: "AI Ethiek Basis", category: "Ethiek", isVisible: true}}
-                                onToggleVisibility={(id) => console.log(id)}
+                            <h2 className="text-xl font-bold text-blue-dark">Geanonimiseerde Gebruikers</h2>
+                            <input
+                                type="text"
+                                placeholder="Zoek op ID of interesse..."
+                                className="px-4 py-2 rounded-full border border-blue-light/40 text-sm outline-none focus:border-blue"
                             />
                         </div>
-                    </section>
+                        <UserTable users={dummyUsers} />
+                    </div>
                 )}
             </div>
         </AppLayout>
