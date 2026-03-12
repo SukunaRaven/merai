@@ -1,6 +1,8 @@
 import Button from "../ui/Button"
+import {Link} from "react-router";
 
-export default function GameCard({title, description}) {
+
+export default function GameCard({title, description, to = '#'}) {
     return (
         <div className="bg-white rounded-xl border p-5 flex flex-col gap-4">
 
@@ -13,8 +15,15 @@ export default function GameCard({title, description}) {
             </p>
 
             <div className="flex gap-2 mt-auto">
-                <Button variant="secondary">Solo</Button>
-                <Button>Multi</Button>
+                <Link to={to}
+                      className="px-6 py-3 rounded-lg font-medium transition bg-gray-200 text-gray-800 hover:bg-gray-300">
+                    <span>Solo</span>
+                </Link>
+                <Link to={to}
+                      className="px-6 py-3 rounded-lg font-medium bg-[var(--color-blue)] text-white hover:bg-[var(--color-blue-dark)]"
+                > <span>Multi</span>
+                </Link>
+
             </div>
 
         </div>
