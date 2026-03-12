@@ -7,8 +7,8 @@ export const TransparencyCard = () => {
             description: "Dit zijn gegevens die je zelf invult of die je apparaat deelt.",
             items: [
                 { info: "Je IP-adres", detail: "Zo weet ik in welke stad je bent.", icon: "📍" },
-                { info: "Je e-mail", detail: "Alleen als je dit zelf invult voor een account.", icon: "📧" },
-                { info: "Je klikgedrag", detail: "Ik onthoud waar je lang naar kijkt.", icon: "🖱️" }
+                { info: "Je e-mail", detail: "Alleen als je dit zelf invult voor een account en toestemming geeft hiervoor.", icon: "📧" },
+                { info: "Je klikgedrag", detail: "Ik onthoud waar je lang naar kijkt of wat je vaker liked dan anders.", icon: "🖱️" }
             ],
             bgColor: "bg-blue/5",
             borderColor: "border-blue"
@@ -17,9 +17,9 @@ export const TransparencyCard = () => {
             title: "Wat weet ik NIET van jou?",
             description: "AI kan niet in je hoofd kijken. Deze dingen blijven privé.",
             items: [
-                { info: "Je echte gevoelens", detail: "Ik zie dat je lacht, maar niet of je echt blij bent.", icon: "🧠" },
-                { info: "Je diepste geheimen", detail: "Ik weet alleen wat je typt, niet wat je denkt.", icon: "🤫" },
-                { info: "Je intentie", detail: "Ik weet dat je klikt, maar niet waarom.", icon: "❓" }
+                { info: "Je Medische Gegevens", detail: "Ik weet misschien hoe je je voelt, maar niet wat er met je lichaam aan de hand is.", icon: "🧠" },
+                { info: "Je Vingerafdruk", detail: "Je kan alleen maar typpen op een toetsenbord, dit mag ik niet weten.", icon: "🤫" },
+                { info: "Je Paspoortnummer", detail: "Ik hoef niks van jouw persoonlijke documenten te weten.", icon: "❓" }
             ],
             bgColor: "bg-primary/10",
             borderColor: "border-primary"
