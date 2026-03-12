@@ -52,46 +52,7 @@ export const submitGuess = async (id, guessData) => {
 
     return response.json();
 };
-//
-// const API_URL = 'http://145.24.237.168:8000';
-//
-// export const startMinigameSession = async (minigame_id, user_id) => {
-//     const response = await fetch(`${API_URL}/minigame-sessions`, {
-//         method: 'POST',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({minigame_id, user_id})
-//     });
-//
-//     if (!response.ok) {
-//         const errorData = await response.json().catch(() => ({
-//             message: 'Failed to start minigame session.'
-//         }));
-//         throw new Error(errorData.message || 'Unknown error starting session');
-//     }
-//
-//     return response.json();
-// };
-//
-// export const fetchMinigameSessionById = async (id) => {
-//     const response = await fetch(`${API_URL}/minigame-sessions/${id}`, {
-//         method: 'GET',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//         },
-//     });
-//
-//     if (!response.ok) {
-//         const errorData = await response.json().catch(() => ({message: `Failed to fetch session ${id}.`}));
-//         throw new Error(errorData.message || 'Unknown error fetching session');
-//     }
-//
-//     return response.json();
-// };
-//
+
 // export const submitGuess = async (id, guessData) => {
 //     const response = await fetch(`${API_URL}/minigame-sessions/${id}/guess`, {
 //         method: 'POST',
@@ -103,8 +64,38 @@ export const submitGuess = async (id, guessData) => {
 //     });
 //
 //     if (!response.ok) {
-//         const errorData = await response.json().catch(() => ({message: 'Failed to submit guess.'}));
+//         // Log de exacte statuscode (bijv. 400, 422, 500)
+//         console.error("Server Status:", response.status);
+//
+//         // Probeer de rauwe tekst van de server te lezen
+//         const errorText = await response.text();
+//         console.error("Server Response Text:", errorText);
+//
+//         throw new Error(`Server fout (${response.status}): ${errorText || 'Geen details'}`);
+//     }
+//
+//     const text = await response.text();
+//     return text ? JSON.parse(text) : null;
+// };
+
+// export const submitGuess = async (id, guessData) => {
+//     const response = await fetch(`${API_URL}/minigame-sessions/${id}/guess`, {
+//         method: 'POST',
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(guessData),
+//     });
+//
+//     if (!response.ok) {
+//         const errorData = await response.json().catch(() => ({}));
 //         throw new Error(errorData.message || 'Unknown error submitting guess');
+//     }
+//
+//     // Check of de status 204 is (No Content) of dat de body leeg is
+//     if (response.status === 204 || response.headers.get("content-length") === "0") {
+//         return null;
 //     }
 //
 //     return response.json();
