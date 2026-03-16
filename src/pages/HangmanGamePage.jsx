@@ -55,21 +55,53 @@ function HangmanGamePage() {
             <Nav/>
             <main className="py-15 px-25">
                 <h1 className="text-black-blue font-bold text-center font-primary text-3xl -mt-10 mb-5">Galgje</h1>
-
                 <div className="flex justify-between gap-4 text-sm mt-5 font-medium">
                     <div className="flex-1 text-center bg-white rounded-xl p-7 shadow-sm">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold mb-4">
                             Fouten: {gameState.wrongCount} / {gameState.maxWrong}
                         </div>
-                        <div className="mt-4 flex flex-wrap justify-center gap-2">
-                            <img src='/TLE3-HangmanFigure_v1.png' alt="Galgje"/>
-
+                        <div
+                            className="relative w-64 h-64 mx-auto mb-6 border border-gray-100 rounded-lg overflow-hidden">                            {/*<img src='/HangmanGround.png' alt="Galgje vloer"/>*/}
+                            <img src='/HangmanGround.png' alt="Galgje vloer"
+                                 className="absolute inset-0 w-full h-full"/>
+                            {gameState.wrongCount >= 1 &&
+                                <img src='/1.png' className="absolute inset-0 w-full h-full"
+                                     alt="Eerste Fout"/>}
+                            {gameState.wrongCount >= 2 &&
+                                <img src='/2.png' className="absolute inset-0 w-full h-full"
+                                     alt="Tweede Fout"/>}
+                            {gameState.wrongCount >= 3 &&
+                                <img src='/3.png' className="absolute inset-0 w-full h-full"
+                                     alt="Derde Fout"/>}
+                            {gameState.wrongCount >= 4 &&
+                                <img src='/4.png' className="absolute inset-0 w-full h-full"
+                                     alt="Vierde Fout"/>}
+                            {gameState.wrongCount >= 5 &&
+                                <img src='/5.png' className="absolute inset-0 w-full h-full"
+                                     alt="Vijfde Fout"/>}
+                            {gameState.wrongCount >= 6 &&
+                                <img src='/6.png' className="absolute inset-0 w-full h-full"
+                                     alt="Zesde Fout"/>}
+                            {gameState.wrongCount >= 7 &&
+                                <img src='/7.png' className="absolute inset-0 w-full h-full"
+                                     alt="Zevende Fout"/>}
+                            {gameState.wrongCount >= 8 &&
+                                <img src='/8.png' className="absolute inset-0 w-full h-full"
+                                     alt="Achtste Fout"/>}
+                            {gameState.wrongCount >= 9 &&
+                                <img src='/9.png' className="absolute inset-0 w-full h-full"
+                                     alt="Negende Fout"/>}
+                            {gameState.wrongCount >= 10 &&
+                                <img src='/10.png' className="absolute inset-0 w-full h-full"
+                                     alt="Tiende Fout"/>}
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {gameState.wrongLetters.map(l => (
-                                <span key={l} className="bg-red-100 text-red-600 px-2 py-1 rounded uppercase">{l}</span>
+                                <span key={l}
+                                      className="bg-red-100 text-red-600 px-3 py-1 rounded-md font-bold uppercase shadow-sm">{l}</span>
                             ))}
                         </div>
                     </div>
-
                     <div
                         className="flex-2 text-center  bg-white border-l-2 border-gray-200 p-7 rounded-xl shadow-sm">
                         <div className="text-4xl mt-34 mb-5">
@@ -98,11 +130,6 @@ function HangmanGamePage() {
                         <h2 className="text-3xl font-bold mb-2">
                             {gameState.status === "won" ? "🎉 Gewonnen!" : "💀 Helaas, verloren..."}
                         </h2>
-
-                        {gameState.status === "lost" && (
-                            <p className="mb-6 text-gray-300">Het woord was: <span
-                                className="text-white font-bold">{gameState.word}</span></p>
-                        )}
                         <button
                             onClick={handleReset}
                             className="mt-4 bg-blue-light text-white-blue px-10 py-3 rounded-full font-bold hover:scale-105 transition-transform"
