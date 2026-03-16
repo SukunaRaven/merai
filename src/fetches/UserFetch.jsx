@@ -14,8 +14,16 @@ export const loginUser = async (credentials) => {
         const errorData = await response.json().catch(() => ({message: 'Login failed and server response is not valid JSON.'}));
         throw new Error(errorData.message || 'Unknown login error');
     }
-
-    return response.json();
+    const data = await response.json();
+    if (data.token) {
+        localStorage.setItem('authToken', data.token);
+    }
+    if (data.id) {
+        localStorage.setItem('userId', data.id);
+    } else if (data.user && data.user.id) {
+        localStorage.setItem('userId', data.user.id);
+    }
+    return data;
 };
 
 export const createUser = async (userData) => {
@@ -55,6 +63,27 @@ export const fetchUserProfile = async () => {
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({message: 'Failed to fetch user profile.'}));
         throw new Error(errorData.message || 'Unknown error fetching profile');
+    }
+
+    return response.json();
+};
+
+export const updateUsername = async (userId, updateData) => {
+    const token = localStorage.getItem('authToken');
+
+    const response = await fetch(`${API_URL}/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updateData),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({message: 'Update mislukt.'}));
+        throw new Error(errorData.message || 'Onbekende fout bij bijwerken');
     }
 
     return response.json();

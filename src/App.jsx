@@ -9,7 +9,7 @@ import MinigamesPage from "./pages/MinigamesPage.jsx";
 import PrivacyPage from "./pages/PrivacyPage.jsx"
 import AdminPage from "./pages/AdminPage.jsx"
 import MyProfileInsight from "./pages/MyProfileInsight.jsx"
-// import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
+import ProfileAdjustPage from "./pages/ProfileAdjustPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import SettingsPage from "./pages/SettingsPage.jsx"
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
@@ -19,7 +19,7 @@ import RootLayout from "./components/layout/RootLayout.jsx";
 
 const router = createBrowserRouter([
     {
-        element: <RootLayout />,
+        element: <RootLayout/>,
         children: [
             {
                 path: '/',
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
                 element: <SettingsPage/>
             },
             {
-                // path: '/settings/profileadjust',
-                // element: <ProfileAdjustPage/>
+                path: '/settings/profileadjust',
+                element: <ProfileAdjustPage/>
             },
             {
                 path: '/settings/accessibility',
