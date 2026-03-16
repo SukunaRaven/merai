@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {fetchUserProfile, updateUsername} from "../fetches/UserFetch.jsx";
+import {deleteProfile, fetchUserProfile, updateUsername} from "../fetches/UserFetch.jsx";
 
 function ProfileAdjustPage() {
 
@@ -32,7 +32,7 @@ function ProfileAdjustPage() {
         };
         loadUserData();
     }, []);
-    
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -51,6 +51,22 @@ function ProfileAdjustPage() {
         }
     };
 
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        if (!window.confirm("Weet je zeker dat je je profiel wilt verwijderen?")) return;
+
+        try {
+            await deleteProfile(formData.id);
+
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userId');
+            alert("Profiel succesvol verwijderd!");
+            navigate("/create");
+        } catch (error) {
+            alert("Fout bij het verwijderen: " + error.message);
+        }
+    };
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
             <main className="py-15 px-50">
@@ -72,6 +88,16 @@ function ProfileAdjustPage() {
                         Opslaan
                     </button>
                 </form>
+                <div className="p-4 flex gap-3 mt-auto">
+                    <button onClick={handleDelete}
+                            className="flex-1 bg-blue text-white-blue cursor-pointer text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">
+                        Verwijder Profiel
+                    </button>
+                    {/*<button onClick={handleDelete}*/}
+                    {/*        className="flex-1 bg-blue text-white-blue cursor-pointer text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">*/}
+                    {/*    Reset Profiel*/}
+                    {/*</button>*/}
+                </div>
             </main>
         </div>
     );

@@ -88,3 +88,20 @@ export const updateUsername = async (userId, updateData) => {
 
     return response.json();
 };
+
+export const deleteProfile = async (userId, profileDeleted) => {
+    const token = localStorage.getItem('authToken');
+
+    const response = await fetch(`${API_URL}/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    });
+    if (response.status === 204) {
+        profileDeleted();
+    }
+
+}
