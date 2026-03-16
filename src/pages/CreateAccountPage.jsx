@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Corrected import
-import { createUser } from "../fetches/UserFetch.jsx";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {createUser} from "../fetches/UserFetch.jsx";
 
 function CreateAccountPage() {
     const [formData, setFormData] = useState({
@@ -18,19 +18,25 @@ function CreateAccountPage() {
         });
     };
 
+    const [showModal, setShowModal] = useState(false);
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
             const data = await createUser(formData);
-            
+
             console.log("Account succesvol aangemaakt!", data);
-            alert("Account aangemaakt! Je kunt nu inloggen.");
-            navigate("/login");
+            setShowModal(true);
         } catch (error) {
             console.error("Registratie mislukt:", error);
             alert("Registratie mislukt: " + error.message);
         }
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+        navigate("/login");
     };
 
     return (
@@ -75,6 +81,21 @@ function CreateAccountPage() {
                     </button>
                 </form>
             </main>
+
+            {showModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+                        <h2 className="text-2xl font-bold mb-4 text-blue">Account succesvol aangemaakt!</h2>
+                        <p className="mb-6 text-gray-600">Account aangemaakt! Je kunt nu inloggen.</p>
+                        <button
+                            onClick={handleModalClose}
+                            className="inline-block bg-blue-light text-black-blue px-6 py-2 rounded hover:bg-primary/90 transition-colors"
+                        >
+                            Inloggen
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

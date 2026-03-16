@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { loginUser } from "../fetches/UserFetch.jsx";
-import { useAuth } from "../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {loginUser} from "../fetches/UserFetch.jsx";
+import {useAuth} from "../context/AuthContext.jsx";
 
 function LoginPage() {
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
     });
-    const { login } = useAuth();
-    const navigate = useNavigate();
+    const {login} = useAuth();
+    const navigate = useNavigate(); // Keep useNavigate for direct navigation
 
     const handleChange = (e) => {
         setCredentials({
@@ -17,6 +17,8 @@ function LoginPage() {
             [e.target.name]: e.target.value
         });
     };
+
+    const [showModal, setShowModal] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,12 +28,16 @@ function LoginPage() {
             login(data.token, data.user.username);
 
             console.log("Login succesvol!", data);
-            alert("Welkom terug, " + data.user.username + "!");
-            navigate("/");
+            setShowModal(true);
         } catch (error) {
             console.error("Login mislukt:", error);
             alert("Login mislukt: " + error.message);
         }
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+        navigate("/");
     };
 
     return (
@@ -66,6 +72,21 @@ function LoginPage() {
                     </button>
                 </form>
             </main>
+
+            {showModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+                        <h2 className="text-2xl font-bold mb-4 text-blue">Login succesvol!</h2>
+                        <p className="mb-6 text-gray-600">Welkom terug.</p>
+                        <button
+                            onClick={handleModalClose}
+                            className="inline-block bg-blue-light text-black-blue px-6 py-2 rounded hover:bg-primary/90 transition-colors"
+                        >
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
