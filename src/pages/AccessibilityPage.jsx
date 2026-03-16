@@ -1,5 +1,5 @@
 import AppLayout from "../components/layout/AppLayout.jsx";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const getSavedSize = () => {

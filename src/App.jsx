@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Homepage from "./pages/Homepage.jsx";
 import AccessibilityPage from "./pages/AccessibilityPage.jsx"
 import AiTipsAndTricksPage from "./pages/AiTipsAndTricksPage.jsx"
@@ -15,10 +15,11 @@ import SettingsPage from "./pages/SettingsPage.jsx"
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import HangmanGamePage from "./pages/HangmanGamePage.jsx";
-import AdminDashboard from "./pages/AdminPage.jsx";
+import RootLayout from "./components/layout/RootLayout.jsx";
 
 const router = createBrowserRouter([
     {
+        element: <RootLayout />,
         children: [
             {
                 path: '/',

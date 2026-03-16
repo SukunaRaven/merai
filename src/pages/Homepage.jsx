@@ -1,11 +1,10 @@
-import {Link} from "react-router";
-import Nav from "../components/layout/Nav.jsx";
+import {Link} from "react-router-dom"; // Changed from "react-router"
 
 function Homepage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3">
-            <Nav/>
+            {/* <Nav/> -- Removed as Nav is now in RootLayout */}
             <main className="py-15 px-25">
                 <div className="text-center">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Welkom bij Merai!</h1>

@@ -1,14 +1,14 @@
-import Nav from "../components/layout/Nav.jsx";
-import {useNavigate} from "react-router";
-import {useState} from "react";
-import {loginUser} from "../fetches/UserFetch.jsx"; // Import the loginUser function
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { loginUser } from "../fetches/UserFetch.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function LoginPage() {
     const [credentials, setCredentials] = useState({
-        username: '',
+        email: '',
         password: ''
     });
-
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -22,13 +22,11 @@ function LoginPage() {
         e.preventDefault();
 
         try {
-            const data = await loginUser(credentials); // Use the centralized loginUser function
-
-            // Assuming loginUser throws an error if response.ok is false
-            localStorage.setItem('authToken', data.token);
+            const data = await loginUser(credentials);
+            login(data.token, data.user.username);
 
             console.log("Login succesvol!", data);
-            alert("Welkom terug!");
+            alert("Welkom terug, " + data.user.username + "!");
             navigate("/");
         } catch (error) {
             console.error("Login mislukt:", error);
@@ -38,17 +36,16 @@ function LoginPage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <Nav/>
-            <main className="py-15 px-50">
+            <main className="py-15 px-50 flex justify-center items-center">
                 <form onSubmit={handleLogin}
-                      className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
+                      className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100 w-full max-w-md">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Login</h1>
                     <div className="flex flex-col">
-                        <label htmlFor="username" className="text-black-blue font-semibold">Gebruikersnaam:</label>
+                        <label htmlFor="email" className="text-black-blue font-semibold">Email:</label>
                         <input type="text"
-                               id="username"
-                               name="username"
-                               value={credentials.username}
+                               id="email"
+                               name="email"
+                               value={credentials.email}
                                onChange={handleChange}
                                className="border p-1 border-gray-400 rounded"
                                required/>

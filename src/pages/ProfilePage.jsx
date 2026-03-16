@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useState} from "react"
 import AIBrainDashboard from "../components/profile/AIBrainDashboard"
 import AppLayout from "../components/layout/AppLayout"
 import ProfileSidebar from "../components/profile/ProfileSidebar"
@@ -15,18 +15,18 @@ export default function ProfilePage() {
 
             <div className="flex gap-8">
 
-                <ProfileSidebar onSelect={setSelectedFavorite} />
+                <ProfileSidebar onSelect={setSelectedFavorite}/>
 
                 <div className="flex-1 space-y-8">
 
                     {/* AI Brain Dashboard */}
-                    <AIBrainDashboard />
+                    <AIBrainDashboard/>
 
                     {/* Favorite explanation */}
                     {selectedFavorite ? (
 
                         <Card>
-                            <FavoriteDetail type={selectedFavorite} />
+                            <FavoriteDetail type={selectedFavorite}/>
                         </Card>
 
                     ) : (

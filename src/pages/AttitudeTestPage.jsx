@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {Link} from 'react-router';
-import Nav from "../components/layout/Nav.jsx";
 
 function AttitudeTestPage() {
     const [showModal, setShowModal] = useState(false);
@@ -13,7 +12,6 @@ function AttitudeTestPage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <Nav/>
             <main className="py-15 px-25">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4 p-4">
                     <div className="flex flex-col">
