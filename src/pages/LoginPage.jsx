@@ -9,7 +9,7 @@ function LoginPage() {
         password: ''
     });
     const {login} = useAuth();
-    const navigate = useNavigate(); // Keep useNavigate for direct navigation
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCredentials({
@@ -25,7 +25,9 @@ function LoginPage() {
 
         try {
             const data = await loginUser(credentials);
-            login(data.token, data.user.username);
+            const userRole = data.user?.role || data.role || 0;
+
+            login(data.token, data.user.username, userRole);
 
             console.log("Login succesvol!", data);
             setShowModal(true);

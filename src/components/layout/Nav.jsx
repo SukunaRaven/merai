@@ -25,8 +25,13 @@ function Nav() {
                             <>
                                 <Link to="/profile"
                                       className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Profiel</Link>
-                                <Link to="/admin"
-                                      className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Admin</Link>
+
+                                {/* Only show Admin link if user role is admin */}
+                                {user.role === 1 && (
+                                    <Link to="/admin"
+                                          className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Admin</Link>
+                                )}
+
                                 <Link to="/profileinsight"
                                       className="text-black-blue text-sm font-medium hover:text-white-blue transition-colors">Profiel
                                     Inzicht</Link>
