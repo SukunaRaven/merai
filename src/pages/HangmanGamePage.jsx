@@ -7,42 +7,31 @@ function HangmanGamePage() {
     const [input, setInput] = useState("");
     const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const startGame = async () => {
-    //         try {
-    //             const data = await fetchMinigameSessions(3, 1);
-    //             setGameState(data.state);
-    //         } catch (e) {
-    //             setError("Kon game niet starten" + e);
-    //         }
-    //     };
-    //     startGame();
-    // }, []);
     useEffect(() => {
         const initGame = async () => {
             try {
                 const savedId = localStorage.getItem('hangman_session_id');
 
                 if (savedId) {
-                    // Er is nog een spel bezig, haal de huidige status op via ID
                     const data = await fetchMinigameSessionById(savedId);
                     setGameState(data.state);
                 } else {
-                    // Geen spel bezig, start een gloednieuwe sessie
                     const data = await fetchMinigameSessions(1, 1);
                     setGameState(data.state);
-                    // Sla de ID op zodat we bij een refresh hierboven uitkomen
                     localStorage.setItem('hangman_session_id', data.state.sessionId);
                 }
             } catch (e) {
-                // Als de opgeslagen sessie verlopen is of niet bestaat,
-                // is het slim om de localStorage leeg te maken zodat de volgende keer een nieuwe game start.
                 localStorage.removeItem('hangman_session_id');
                 setError("Kon de game niet laden: " + e.message);
             }
         };
         initGame();
     }, []);
+
+    const handleReset = () => {
+        localStorage.removeItem('hangman_session_id');
+        window.location.reload();
+    };
 
     const handleGuess = async (e) => {
         e.preventDefault();
@@ -65,22 +54,57 @@ function HangmanGamePage() {
     return (<div className="bg-white-blue min-h-screen">
             <Nav/>
             <main className="py-15 px-25">
-                <h1 className="text-black-blue font-bold text-center font-primary text-3xl mb-8">Galgje</h1>
-
-                <div className="flex justify-between gap-4 text-sm mt-10 font-medium">
+                <h1 className="text-black-blue font-bold text-center font-primary text-3xl -mt-10 mb-5">Galgje</h1>
+                <div className="flex justify-between gap-4 text-sm mt-5 font-medium">
                     <div className="flex-1 text-center bg-white rounded-xl p-7 shadow-sm">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold mb-4">
                             Fouten: {gameState.wrongCount} / {gameState.maxWrong}
                         </div>
-                        <div className="mt-4 flex flex-wrap justify-center gap-2">
+                        <div
+                            className="relative w-64 h-64 mx-auto mb-6 border border-gray-100 rounded-lg overflow-hidden">                            {/*<img src='/HangmanGround.png' alt="Galgje vloer"/>*/}
+                            <img src='/HangmanGround.png' alt="Galgje vloer"
+                                 className="absolute inset-0 w-full h-full"/>
+                            {gameState.wrongCount >= 1 &&
+                                <img src='/1.png' className="absolute inset-0 w-full h-full"
+                                     alt="Eerste Fout"/>}
+                            {gameState.wrongCount >= 2 &&
+                                <img src='/2.png' className="absolute inset-0 w-full h-full"
+                                     alt="Tweede Fout"/>}
+                            {gameState.wrongCount >= 3 &&
+                                <img src='/3.png' className="absolute inset-0 w-full h-full"
+                                     alt="Derde Fout"/>}
+                            {gameState.wrongCount >= 4 &&
+                                <img src='/4.png' className="absolute inset-0 w-full h-full"
+                                     alt="Vierde Fout"/>}
+                            {gameState.wrongCount >= 5 &&
+                                <img src='/5.png' className="absolute inset-0 w-full h-full"
+                                     alt="Vijfde Fout"/>}
+                            {gameState.wrongCount >= 6 &&
+                                <img src='/6.png' className="absolute inset-0 w-full h-full"
+                                     alt="Zesde Fout"/>}
+                            {gameState.wrongCount >= 7 &&
+                                <img src='/7.png' className="absolute inset-0 w-full h-full"
+                                     alt="Zevende Fout"/>}
+                            {gameState.wrongCount >= 8 &&
+                                <img src='/8.png' className="absolute inset-0 w-full h-full"
+                                     alt="Achtste Fout"/>}
+                            {gameState.wrongCount >= 9 &&
+                                <img src='/9.png' className="absolute inset-0 w-full h-full"
+                                     alt="Negende Fout"/>}
+                            {gameState.wrongCount >= 10 &&
+                                <img src='/10.png' className="absolute inset-0 w-full h-full"
+                                     alt="Tiende Fout"/>}
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {gameState.wrongLetters.map(l => (
-                                <span key={l} className="bg-red-100 text-red-600 px-2 py-1 rounded uppercase">{l}</span>
+                                <span key={l}
+                                      className="bg-red-100 text-red-600 px-3 py-1 rounded-md font-bold uppercase shadow-sm">{l}</span>
                             ))}
                         </div>
                     </div>
-
-                    <div className="flex-2 text-center bg-white border-l-2 border-gray-200 p-7 rounded-xl shadow-sm">
-                        <div className="text-4xl mb-10">
+                    <div
+                        className="flex-2 text-center  bg-white border-l-2 border-gray-200 p-7 rounded-xl shadow-sm">
+                        <div className="text-4xl mt-34 mb-5">
                             {gameState.maskedWord}
                         </div>
 
@@ -93,7 +117,8 @@ function HangmanGamePage() {
                                 placeholder="..."
                                 autoFocus
                             />
-                            <button type="submit" className="bg-black-blue text-white px-8 py-2 rounded-full font-bold">
+                            <button type="submit"
+                                    className="bg-primary text-black-blue px-8 py-2 rounded-full font-bold">
                                 Verstuur
                             </button>
                         </form>
@@ -101,10 +126,15 @@ function HangmanGamePage() {
                 </div>
 
                 {gameState.status !== "active" && (
-                    <div className="text-center mt-10 p-10 bg-black-blue text-white rounded-xl">
-                        <h2 className="text-3xl font-bold mb-4">
-                            {gameState.status === "won" ? "Gewonnen!" : "Helaas, verloren... "}
+                    <div className="text-center mt-10 p-10 bg-blue text-white rounded-xl shadow-lg">
+                        <h2 className="text-3xl font-bold mb-2">
+                            {gameState.status === "won" ? "🎉 Gewonnen!" : "💀 Helaas, verloren..."}
                         </h2>
+                        <button
+                            onClick={handleReset}
+                            className="mt-4 bg-blue-light text-white-blue px-10 py-3 rounded-full font-bold hover:scale-105 transition-transform"
+                        > Opnieuw Spelen
+                        </button>
                     </div>
                 )}
             </main>
