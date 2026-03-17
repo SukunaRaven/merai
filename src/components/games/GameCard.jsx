@@ -1,5 +1,5 @@
 import Button from "../ui/Button"
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 
 
 export default function GameCard({title, description, to = '#'}) {
