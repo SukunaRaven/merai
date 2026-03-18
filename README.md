@@ -35,7 +35,7 @@ Door de snelheid van **Vite** te combineren met de modulariteit van **React**, b
 | **Library** | React 18 | Component-based UI ontwikkeling. |
 | **Build Tool** | Vite | Next-generation frontend tooling. |
 | **Taal** | JavaScript (ES6+) | Moderne scripting met async/await. |
-| **Styling** | CSS3 / Modules | Schaalbare en onderhoudbare styling. |
+| **Styling** | TailwindCSS / Modules | Schaalbare en onderhoudbare styling. |
 | **Pakketbeheer** | npm | Dependency management en scripts. |
 </details>
 
