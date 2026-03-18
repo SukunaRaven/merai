@@ -21,7 +21,7 @@ const MyProfileInzicht = () => {
     return (
 
         <AppLayout>
-            <div className="max-w-7xl mx-auto py-15 px-25 space-y-12">
+            <div className="max-w-7xl mx-auto py-10 md:py-15 px-6 md:px-15 lg:px-25 bg-white-blue font-primary">
                 {/* Introductie */}
                 <section>
                     <h1 className="text-3xl font-secondary font-bold text-blue-dark">Wat denkt de AI over mij?</h1>
