@@ -24,23 +24,34 @@ function HangmanMultiplayerPage() {
         if (matchInfo?.match_id) {
             interval = setInterval(async () => {
                 try {
-                    // Always update players list
-                    const playersData = await fetchMatchPlayers(matchInfo.match_id);
-                    setPlayers(playersData);
+                    if (!gameState) { // In the lobby
+                        // Update players list
+                        const playersData = await fetchMatchPlayers(matchInfo.match_id);
+                        setPlayers(playersData);
 
-                    // If game started, update state
-                    if (gameState || playersData.some(p => p.status === 'active')) { // Assuming backend might not give status in players list, checking if we can fetch state
-                         try {
-                             const stateData = await fetchMatchState(matchInfo.match_id);
-                             if (stateData.state) {
-                                 setGameState(stateData.state);
-                             }
-                         } catch (e) {
-                             // Match might not be started yet
-                         }
+                        // Check if game has started by trying to fetch state
+                        try {
+                            const stateData = await fetchMatchState(matchInfo.match_id);
+                            if (stateData.state) {
+                                setGameState(stateData.state);
+                            }
+                        } catch (e) {
+                            // Expected error if match hasn't started. Ignore.
+                        }
+                    } else { // In the game
+                        // Poll for game state updates
+                        const stateData = await fetchMatchState(matchInfo.match_id);
+                        if (stateData.state) {
+                            setGameState(stateData.state);
+                        }
+                        // Also refresh player list
+                        const playersData = await fetchMatchPlayers(matchInfo.match_id);
+                        setPlayers(playersData);
                     }
                 } catch (e) {
-                    console.error("Polling error", e);
+                    console.error("Polling error:", e);
+                    setError("Kon de match data niet laden: " + e.message);
+                    clearInterval(interval);
                 }
             }, 2000);
         }
