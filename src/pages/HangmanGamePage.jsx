@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 import {fetchMinigameSessionById, fetchMinigameSessions, submitGuess} from "../fetches/MinigameSessionFetch.jsx";
 
 function HangmanGamePage() {
@@ -52,7 +53,16 @@ function HangmanGamePage() {
 
     return (<div className="bg-white-blue min-h-screen">
             <main className="py-15 px-25">
-                <h1 className="text-black-blue font-bold text-center font-primary text-3xl -mt-10 mb-5">Galgje</h1>
+                <div className="flex justify-between items-center -mt-10 mb-5">
+                    <h1 className="text-black-blue font-bold text-center font-primary text-3xl flex-1">Galgje</h1>
+                    <Link 
+                        to="/minigames/hangman/multiplayer" 
+                        className="bg-blue text-white text-sm px-4 py-2 rounded-full font-bold hover:bg-blue-dark transition"
+                    >
+                        Multiplayer
+                    </Link>
+                </div>
+
                 <div className="flex justify-between gap-4 text-sm mt-5 font-medium">
                     <div className="flex-1 text-center bg-white rounded-xl p-7 shadow-sm">
                         <div className="text-2xl font-bold mb-4">
