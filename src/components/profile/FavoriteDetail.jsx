@@ -1,95 +1,58 @@
-import Button from "../ui/Button"
+import React, { useEffect, useState } from 'react';
+import { aiService } from '../../fetches/AiFetch';
 
-export default function FavoriteDetail({ type }) {
+const AiProfileView = ({ userId = 1 }) => { // Default op ID 1 om te testen
+    const [themes, setThemes] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const mockData = {
-        "Favoriete Eten": {
-            result: "Friet", // DB: user_preferences.favorite_food
-            confidence: 82, // DB: ai_predictions.food_confidence
-            sources: [
-                {
-                    game: "Galgje",
-                    impact: 72 // DB: game_results.galgje_score
-                },
-                {
-                    game: "Memory",
-                    impact: 83 // DB: game_results.memory_score
-                },
-                {
-                    game: "Zeg Wat Je Ziet",
-                    impact: 94 // DB: game_results.swys_score
-                }
-            ]
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                setLoading(true);
+                // We roepen de service aan met de ID
+                const data = await aiService.getThemesByUserId(userId);
+                setThemes(data);
+            } catch (err) {
+                setError("Geen data gevonden in de database voor ID: " + userId);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (userId) {
+            loadData();
         }
-    }
+    }, [userId]);
 
-    const data = mockData[type]
-
-    if (!data) {
-        return <p>Geen data beschikbaar</p>
-    }
+    if (loading) return <div className="p-10 text-center">Data ophalen voor User {userId}...</div>;
+    if (error) return <div className="p-10 text-center text-red-500">{error}</div>;
 
     return (
-        <div className="space-y-6">
-
-            <h2 className="text-2xl font-semibold">
-                {type}
+        <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10 font-primary">
+            <h2 className="text-2xl font-bold mb-6 text-black-blue border-b pb-4">
+                Database Profiel (User ID: {userId})
             </h2>
 
-            <div className="text-lg">
-                Ik denk dat jouw favoriet is:
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <ThemeItem label="Film" value={themes?.movie} icon="🎬" />
+                <ThemeItem label="Genre" value={themes?.movie_genre} icon="🎞️" />
+                <ThemeItem label="Artiest" value={themes?.artist} icon="🎤" />
+                <ThemeItem label="Muziek" value={themes?.music_genre} icon="🎵" />
+                <ThemeItem label="Eten" value={themes?.food} icon="🍕" />
+                <ThemeItem label="Kleur" value={themes?.color} icon="🎨" />
+                <ThemeItem label="Land" value={themes?.holiday_country} icon="🌍" />
+                <ThemeItem label="Stijl" value={themes?.clothing_style} icon="👔" />
             </div>
-
-            <div className="text-3xl font-bold text-blue">
-                {data.result}
-            </div>
-
-            <div className="text-sm text-gray-500">
-                Zekerheid: {data.confidence}%
-            </div>
-
-            <div className="space-y-4 pt-4">
-
-                <h3 className="font-medium">
-                    Hoe heb ik dit geleerd?
-                </h3>
-
-                {data.sources.map((source) => (
-
-                    <div key={source.game}>
-
-                        <div className="flex justify-between text-sm">
-                            <span>{source.game}</span>
-                            <span>{source.impact}%</span>
-                        </div>
-
-                        <div className="w-full h-2 bg-gray-200 rounded-full">
-
-                            <div
-                                className="h-full bg-blue rounded-full"
-                                style={{ width: `${source.impact}%` }}
-                            />
-
-                        </div>
-
-                    </div>
-
-                ))}
-
-            </div>
-
-            <div className="pt-6 flex gap-3">
-
-                <Button variant="secondary">
-                    Dit klopt niet
-                </Button>
-
-                <Button>
-                    Klopt!
-                </Button>
-
-            </div>
-
         </div>
-    )
-}
+    );
+};
+
+const ThemeItem = ({ label, value, icon }) => (
+    <div className="p-4 bg-gray-50 border border-gray-100 rounded-lg">
+        <p className="text-[10px] uppercase font-bold text-blue tracking-widest mb-1">{label}</p>
+        <p className="text-gray-800">{icon} {value || "Onbekend"}</p>
+    </div>
+);
+
+export default AiProfileView;
