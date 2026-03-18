@@ -13,7 +13,7 @@ export default function ProfilePage() {
 
         <AppLayout>
 
-            <div className="max-w-7xl mx-auto flex gap-8">
+            <div className="max-w-7xl mx-auto py-15 px-25 flex gap-8">
 
                 <ProfileSidebar onSelect={setSelectedFavorite}/>
 
