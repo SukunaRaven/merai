@@ -1,8 +1,8 @@
-# 🌌 Merai — AI Interface Framework
+# 🌌 Merai — Fullstack AI Interface Framework
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Framework-React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
-  <img src="https://img.shields.io/badge/Build_Tool-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/Frontend-React_18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/API_Connection-Fetch_API-ff69b4?style=for-the-badge&logo=javascript&logoColor=white" alt="Fetch API">
   <img src="https://img.shields.io/badge/Language-JavaScript_ES6+-f7df1e?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
   <img src="https://img.shields.io/badge/Styling-Tailwind_CSS-38bdf8?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind">
 </p>
@@ -12,19 +12,19 @@
 <details open>
 <summary>## 📖 Introductie</summary>
 
-Welkom bij **Merai**. Dit project is een moderne, high-performance webapplicatie die fungeert als een robuust fundament voor AI-geïntegreerde interfaces. 
+Welkom bij **Merai**. Dit project focust op het leveren van een hoogwaardige gebruikerservaring voor AI-gedreven platformen. De frontend is volledig gescheiden van de backend-logica, wat zorgt voor een schaalbaar en veilig systeem.
 
-Door de snelheid van **Vite** te combineren met de modulariteit van **React**, biedt Merai een naadloze ervaring voor zowel ontwikkelaars als eindgebruikers. Het is ontworpen om schaalbaar te zijn, van simpele experimenten tot volledige AI-dashboards.
+De interface is volledig gestyled volgens een **custom styleguide** in Tailwind CSS, waardoor kleuren, typografie en spacing consistent zijn over de gehele applicatie. Data wordt in real-time opgehaald van de Merai API via beveiligde endpoints.
 </details>
 
 <details>
 <summary>## 🚀 Core Functionaliteiten</summary>
 
-* **⚡ Razendsnelle Runtime:** Dankzij de Vite-bundler start de applicatie in milliseconden met instant Hot Module Replacement (HMR).
-* **🤖 AI Integration Ready:** Geoptimaliseerde structuur voor communicatie met Large Language Models (LLM's) via API-aanroepen.
-* **🧩 Modulair Componenten Systeem:** Gebouwd met herbruikbare React-componenten voor een schaalbare codebase.
-* **📱 Mobile-First Design:** Een volledig responsive interface die zich aanpast aan elk schermformaat.
-* **🛠️ Developer Experience:** Geconfigureerd met moderne tooling voor een soepele workflow.
+* **⚛️ React Dynamic UI:** Een snelle, component-gebaseerde interface die direct reageert op data-updates.
+* **📡 Live Data Fetching:** Naadloze integratie met de externe API via de native Fetch API voor real-time updates.
+* **🎨 Custom Styleguide:** Een diepgaande Tailwind-implementatie van ons eigen design system voor visuele consistentie.
+* **🤖 AI Workflow:** De interface is geoptimaliseerd voor het weergeven en verwerken van AI-gegenereerde content en prompts.
+* **📱 Responsive Design:** Mobile-first benadering waardoor de tool op elk apparaat bruikbaar is.
 </details>
 
 <details>
@@ -32,17 +32,17 @@ Door de snelheid van **Vite** te combineren met de modulariteit van **React**, b
 
 | Categorie | Technologie | Opmerking |
 | :--- | :--- | :--- |
-| **Library** | React 18 | Component-based UI ontwikkeling. |
-| **Build Tool** | Vite | Next-generation frontend tooling. |
-| **Taal** | JavaScript (ES6+) | Moderne scripting met async/await. |
-| **Styling** | TailwindCSS / Modules | Schaalbare en onderhoudbare styling. |
-| **Pakketbeheer** | npm | Dependency management en scripts. |
+| **Frontend** | React 18 | Kern van de applicatie. |
+| **Styling** | Tailwind CSS | Utility-first CSS met custom configuratie. |
+| **Design System** | Custom Styleguide | Eigen implementatie van UI-standaarden. |
+| **Data Fetching** | Fetch API | Directe communicatie met de backend. |
+| **Backend API** | Node.js / MySQL | Extern gehost op `http://145.24.237.168:8000/`. |
 </details>
 
 <details>
 <summary>## ⚙️ Installatie en Run Local</summary>
 
-Volg deze stappen om het project lokaal op te zetten.
+Volg deze stappen om de Merai frontend lokaal te draaien. De verbinding met de backend is al geconfigureerd.
 
 ### 1. Repository clonen
 ```bash
@@ -55,21 +55,13 @@ cd merai
 npm install
 ```
 
-### 3. Environment Setup
-Maak een .env bestand aan in de root en voeg je API-sleutels toe indien nodig.
-```bash
-# Voorbeeld
-VITE_API_KEY=jouw_sleutel_hier
-```
-
-### 4. Development Server starten
-Draai de applicatie in de ontwikkelmodus:
+### 3. Development Server starten
 ```bash
 npm run dev
 ```
-De applicatie is nu bereikbaar op http://localhost:5173.
+De applicatie start automatisch op http://localhost:5173. De data wordt direct opgehaald van de live productie-API.
 
-### 5. Build voor Productie
+### 4. Build voor Productie
 Om een geoptimaliseerde versie te maken voor deployment:
 ```bash
 npm run build
@@ -77,30 +69,34 @@ npm run build
 </details>
 
 <details>
-<summary>📂 Project Structure (Key Files)</summary>
+<summary>📂 Project Structure</summary>
 
-* Een overzicht van de belangrijkste mappen en bestanden in Merai:
-* src/App.jsx: Het centrale punt van de applicatie waar routing en hoofdcomponenten samenkomen.
-* src/components/: Map voor alle herbruikbare UI-elementen (knoppen, kaarten, formulieren).
-* src/hooks/: Bevat custom React hooks voor het afhandelen van AI-logica en data-fetching.
-* src/main.jsx: Het startpunt waar de React-applicatie aan de DOM wordt gekoppeld.
-* vite.config.js: Configuratiebestand voor Vite-plugins en aliassen.
-
+Een overzicht van hoe de Merai frontend is georganiseerd:
+```bash
+merai/
+├── src/
+│   ├── components/  # Herbruikbare UI-elementen (Buttons, Cards, Modals)
+│   ├── hooks/       # Custom React hooks voor Fetch-logica
+│   ├── assets/      # Afbeeldingen en globale styles
+│   ├── App.jsx      # De centrale hub en routing
+│   └── index.js     # Entry point voor de React DOM
+├── tailwind.config.js # De definitie van onze Custom Styleguide
+└── package.json     # Project scripts en dependencies
+```
 </details>
 
 <details>
-<summary>📊 Architectuur Diagram</summary>
+<summary>📊 Data-Architectuur Diagram</summary>
 
-De onderstaande grafiek visualiseert de dataflow binnen de Merai-applicatie:
+De flow van informatie tussen de gebruiker en de externe databron:
 ```bash
 graph LR
-    A[Gebruiker] --> B[React UI]
-    B --> C[Custom Hooks]
-    C --> D[Vite Dev Server]
-    D --> E[AI Backend / API]
-    E --> D
-    D --> C
-    C --> B
+    A[Gebruiker] --> B[React Frontend]
+    B -->|Fetch Request| C[Externe API: :8000]
+    C -->|Query| D[(MySQL Database)]
+    D -->|Data| C
+    C -->|JSON Response| B
+    B -->|State Update| A
 ```
 </details>
 
