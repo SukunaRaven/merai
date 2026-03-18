@@ -85,18 +85,3 @@ merai/
 ```
 </details>
 
-<details>
-<summary>📊 Data-Architectuur Diagram</summary>
-
-De flow van informatie tussen de gebruiker en de externe databron:
-```bash
-graph LR
-    A[Gebruiker] --> B[React Frontend]
-    B -->|Fetch Request| C[Externe API: :8000]
-    C -->|Query| D[(MySQL Database)]
-    D -->|Data| C
-    C -->|JSON Response| B
-    B -->|State Update| A
-```
-</details>
-
