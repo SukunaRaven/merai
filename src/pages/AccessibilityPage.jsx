@@ -1,6 +1,6 @@
 import AppLayout from "../components/layout/AppLayout.jsx";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
+import {useState, useEffect} from "react";
 
 const getSavedSize = () => {
     const saved = localStorage.getItem('user-font-size');
@@ -18,7 +18,7 @@ function AccessibilityPage() {
         const root = document.documentElement;
 
         // Remove all possible colorblind classes before adding the new one
-        root.classList.remove('mode-protanopia', 'mode-deuteranopia', 'mode-tritanopia', 'mode-achromatopsia');
+        root.classList.remove('mode-grayscale', 'mode-protanopia', 'mode-deuteranopia', 'mode-tritanopia', 'mode-achromatopsia');
 
         if (colorMode !== 'none') {
             root.classList.add(`mode-${colorMode}`);
