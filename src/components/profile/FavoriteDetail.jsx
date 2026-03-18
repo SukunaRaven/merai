@@ -1,95 +1,45 @@
-import Button from "../ui/Button"
+// src/components/profile/FavoriteDetail.jsx
+import React, { useEffect, useState } from 'react';
+import { aiService } from '../../fetches/AiFetch';
 
 export default function FavoriteDetail({ type }) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const mockData = {
-        "Favoriete Eten": {
-            result: "Friet", // DB: user_preferences.favorite_food
-            confidence: 82, // DB: ai_predictions.food_confidence
-            sources: [
-                {
-                    game: "Galgje",
-                    impact: 72 // DB: game_results.galgje_score
-                },
-                {
-                    game: "Memory",
-                    impact: 83 // DB: game_results.memory_score
-                },
-                {
-                    game: "Zeg Wat Je Ziet",
-                    impact: 94 // DB: game_results.swys_score
-                }
-            ]
-        }
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                // We halen de themes op voor profile 1 (of user.id)
+                const result = await aiService.getThemesByProfileId(1);
+                setData(result);
+            } catch (err) {
+                console.error("Fout bij ophalen:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [type]); // Herlaad als je op een andere categorie klikt
 
-    const data = mockData[type]
+    if (loading) return <div className="p-10 text-center">AI graaft in de database...</div>;
 
-    if (!data) {
-        return <p>Geen data beschikbaar</p>
-    }
+    // Pak de specifieke waarde uit de database (bijv. data['food'])
+    const value = data ? data[type] : "Nog geen data";
 
     return (
-        <div className="space-y-6">
-
-            <h2 className="text-2xl font-semibold">
-                {type}
-            </h2>
-
-            <div className="text-lg">
-                Ik denk dat jouw favoriet is:
+        <div className="p-6">
+            <h3 className="text-xl font-bold text-blue mb-4 capitalize">
+                Jouw favoriete {type.replace('_', ' ')}
+            </h3>
+            <div className="bg-gray-50 p-6 rounded-xl border border-dashed border-blue/30 text-center">
+                <p className="text-sm text-gray-500 uppercase tracking-widest mb-1 font-bold">Merai denkt:</p>
+                <p className="text-3xl font-bold text-black-blue">{value}</p>
             </div>
-
-            <div className="text-3xl font-bold text-blue">
-                {data.result}
+            <div className="mt-6 text-sm text-gray-600">
+                <p className="font-bold mb-1 italic">Waarom denkt Merai dit?</p>
+                <p>Op basis van je YouTube-interesses en opgeslagen profielkenmerken in onze database.</p>
             </div>
-
-            <div className="text-sm text-gray-500">
-                Zekerheid: {data.confidence}%
-            </div>
-
-            <div className="space-y-4 pt-4">
-
-                <h3 className="font-medium">
-                    Hoe heb ik dit geleerd?
-                </h3>
-
-                {data.sources.map((source) => (
-
-                    <div key={source.game}>
-
-                        <div className="flex justify-between text-sm">
-                            <span>{source.game}</span>
-                            <span>{source.impact}%</span>
-                        </div>
-
-                        <div className="w-full h-2 bg-gray-200 rounded-full">
-
-                            <div
-                                className="h-full bg-blue rounded-full"
-                                style={{ width: `${source.impact}%` }}
-                            />
-
-                        </div>
-
-                    </div>
-
-                ))}
-
-            </div>
-
-            <div className="pt-6 flex gap-3">
-
-                <Button variant="secondary">
-                    Dit klopt niet
-                </Button>
-
-                <Button>
-                    Klopt!
-                </Button>
-
-            </div>
-
         </div>
-    )
+    );
 }
