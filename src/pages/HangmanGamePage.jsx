@@ -55,12 +55,6 @@ function HangmanGamePage() {
             <main className="py-15 px-25">
                 <div className="flex justify-between items-center -mt-10 mb-5">
                     <h1 className="text-black-blue font-bold text-center font-primary text-3xl flex-1">Galgje</h1>
-                    <Link 
-                        to="/minigames/hangman/multiplayer" 
-                        className="bg-blue text-white text-sm px-4 py-2 rounded-full font-bold hover:bg-blue-dark transition"
-                    >
-                        Multiplayer
-                    </Link>
                 </div>
 
                 <div className="flex justify-between gap-4 text-sm mt-5 font-medium">
