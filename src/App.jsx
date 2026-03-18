@@ -78,6 +78,16 @@ const router = createBrowserRouter([
                 element: <HangmanGamePage/>
             },
             {
+                path: '/minigames/not-available',
+                element: <div className="p-20 text-center">
+                    <h1 className="text-2xl font-bold">Deze game is nog in ontwikkeling!</h1>
+                    <p className="mb-4">Probeer ons andere spel.</p>
+                    <a href="/minigames/hangman"
+                       className="flex-1 bg-blue text-white-blue text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">Speel
+                        Galgje</a>
+                </div>
+            },
+            {
                 path: '/create',
                 element: <CreateAccountPage/>
             },

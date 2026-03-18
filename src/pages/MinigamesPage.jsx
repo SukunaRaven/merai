@@ -37,13 +37,15 @@ export default function MinigamesPage() {
 
                 {!loading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {minigames.map((game) => (
-                            <GameCard
-                                key={game._id}
-                                title={game.name}
-                                description={game.description}
-                                to="/minigames/hangman"/>
-                        ))}
+                        {minigames.map((game) => {
+                            const isHangman = game.name.toLowerCase() === "hangman" || game.name.toLowerCase() === "galgje";
+                            return (<GameCard
+                                    key={game._id}
+                                    title={game.name}
+                                    description={game.description}
+                                    to={isHangman ? "/minigames/hangman" : "/minigames/not-available"}/>
+                            )
+                        })}
                     </div>
                 )}
             </main>
