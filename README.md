@@ -1,6 +1,6 @@
 # 🌌 Merai
 
-**Merai** is een krachtig, modern AI-interface framework gebouwd met **React** en **Vite**. Het project is ontworpen voor ontwikkelaars die een snelle, responsieve en modulaire frontend nodig hebben voor AI-gedreven applicaties.
+**Merai** is een moderne, high-performance webapplicatie gebouwd met **React** en **Vite**. Het project dient als een robuust fundament voor AI-geïntegreerde interfaces, met een focus op snelheid, modulariteit en een superieure gebruikerservaring.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -9,54 +9,51 @@
 
 ---
 
-## ✨ Functies
-
-* **⚡ Bliksemsnel:** Ontwikkeld met Vite voor een bijna instant HMR (Hot Module Replacement).
-* **🤖 AI-Ready:** Geoptimaliseerd voor integratie met LLM-API's (zoals OpenAI of Anthropic).
-* **🧩 Modulair:** Een component-gebaseerde structuur die schalen en onderhoud makkelijk maakt.
-* **📱 Responsive:** Werkt naadloos op desktop, tablet en mobiele apparaten.
-* **🎨 Clean UI:** Een minimalistisch design gefocust op gebruikerservaring.
+## 📝 Intro
+Merai is ontwikkeld om de kloof tussen complexe AI-backend logica en een intuïtieve frontend te overbruggen. Door gebruik te maken van de kracht van Vite, biedt Merai een ontwikkelaarservaring die razendsnel is, terwijl de eindgebruiker geniet van een vloeiende, applicatie-achtige interface. Het is ontworpen om schaalbaar te zijn, van simpele chatbots tot uitgebreide AI-dashboards.
 
 ---
 
-## 🛠️ Installatie & Setup
-
-Volg deze stappen om Merai lokaal op te zetten:
-
-1.  **Clone de repository:**
-    ```bash
-    git clone [https://github.com/SukunaRaven/merai.git](https://github.com/SukunaRaven/merai.git)
-    cd merai
-    ```
-
-2.  **Installeer de dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Configureer je omgeving:**
-    Maak een `.env` bestand aan in de root-map voor je API-sleutels:
-    ```env
-    VITE_API_KEY=jouw_sleutel_hier
-    ```
-
-4.  **Start de development server:**
-    ```bash
-    npm run dev
-    ```
-    Open [http://localhost:5173](http://localhost:5173) in je browser.
+## ✨ Core Functionaliteiten
+* **🚀 Razendsnelle Runtime:** Dankzij de Vite-bundler start de applicatie in milliseconden met instant Hot Module Replacement (HMR).
+* **🤖 AI Integration Ready:** Geoptimaliseerde structuur voor naadloze communicatie met LLM-API's zoals OpenAI of Anthropic.
+* **🧩 Component-Driven Design:** Een volledig modulaire opbouw waardoor UI-elementen overal hergebruikt kunnen worden.
+* **📱 Volledig Responsive:** Een "mobile-first" benadering zorgt ervoor dat de interface op elk schermformaat perfect schaalt.
+* **🛠️ Geoptimaliseerde Build:** Productie-ready configuratie voor minimale bundle-sizes en maximale performance.
 
 ---
 
-## 📂 Project Structuur
+## 🏗️ Tech Stack
+* **Frontend Library:** [React.js](https://react.dev/) (v18+)
+* **Build Tool:** [Vite](https://vitejs.dev/)
+* **Taal:** JavaScript (ES6+)
+* **Styling:** CSS3 / [Vul hier bijv. Tailwind in indien van toepassing]
+* **Pakketbeheer:** npm
 
-```text
+---
+
+## 🛠️ Installatie en Run Local
+
+Volg deze stappen om een lokale kopie van het project op te zetten en te draaien.
+
+### 1. Vereisten
+Zorg dat je [Node.js](https://nodejs.org/) (LTS versie aanbevolen) op je machine hebt staan.
+
+### 2. Clone de Repo
+```bash
+git clone [https://github.com/SukunaRaven/merai.git](https://github.com/SukunaRaven/merai.git)
+cd merai
+
 merai/
-├── src/
-│   ├── components/     # Herbruikbare UI-elementen
-│   ├── hooks/          # Custom React hooks voor AI-logica
-│   ├── assets/         # Afbeeldingen en styling
-│   └── App.jsx         # De centrale hub van de applicatie
-├── public/             # Statische assets
-├── package.json        # Project informatie en scripts
-└── vite.config.js      # Vite configuratie-instellingen
+├── public/              # Statische bestanden (favicon, logo's)
+├── src/                 # Broncode van de applicatie
+│   ├── assets/          # Afbeeldingen, fonts en globale styles
+│   ├── components/      # Herbruikbare UI-componenten (Buttons, Inputs, etc.)
+│   ├── hooks/           # Custom React hooks voor API-aanroepen en logica
+│   ├── pages/           # Hoofdpagina's en schermvullende views
+│   ├── App.jsx          # De root component en routing
+│   └── main.jsx         # Entry point voor de React DOM render
+├── .gitignore           # Bestanden die niet in Git horen (zoals node_modules)
+├── index.html           # HTML template basis
+├── package.json         # Scripts, dependencies en project info
+└── vite.config.js       # Configuratie-instellingen voor Vite
