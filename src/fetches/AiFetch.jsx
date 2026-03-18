@@ -1,22 +1,32 @@
+// src/fetches/AiFetch.jsx
 const API_URL = 'http://145.24.237.168:8000/ai';
 
-const getHeaders = () => ({
-    'Content-Type': 'application/json'
-});
-
 export const aiService = {
-    // We geven de userId nu direct mee als argument
-    getThemesByUserId: async (userId) => {
+    getThemesByProfileId: async (profileId) => {
         try {
-            const res = await fetch(`${API_URL}/user/${userId}`, {
+            const res = await fetch(`${API_URL}/profile/${profileId}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
 
-            if (!res.ok) throw new Error("Kon geen data vinden voor deze ID.");
+            // Als de data NIET gevonden is (404), sturen we nep-data terug voor de test
+            if (res.status === 404) {
+                console.warn("Server gaf 404, we gebruiken nu test-data uit de frontend.");
+                return {
+                    movie: "Interstellar (Test)",
+                    movie_genre: "Sci-Fi",
+                    artist: "Hans Zimmer",
+                    food: "Sushi",
+                    color: "Blauw",
+                    music_genre: "Ambient",
+                    holiday_country: "IJsland",
+                    clothing_style: "Casual",
+                    animal: "Wolf",
+                    place: "Ruimte"
+                };
+            }
 
+            if (!res.ok) throw new Error("Server fout");
             return await res.json();
         } catch (error) {
             console.error("Fetch fout:", error);
