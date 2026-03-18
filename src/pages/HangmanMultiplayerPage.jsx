@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../context/AuthContext.jsx";
 import {
     createMatch,
     joinMatch,
@@ -11,6 +12,7 @@ import {
 
 function HangmanMultiplayerPage() {
     const navigate = useNavigate();
+    const {user, logout} = useAuth();
     const [matchInfo, setMatchInfo] = useState(null); // { match_id, join_code, user_id, is_host }
     const [players, setPlayers] = useState([]);
     const [gameState, setGameState] = useState(null);
@@ -32,7 +34,7 @@ function HangmanMultiplayerPage() {
                         // Check if game has started by trying to fetch state
                         try {
                             const stateData = await fetchMatchState(matchInfo.match_id);
-                            if (stateData.state) {
+                            if (stateData.state && stateData.state.status === 'active') {
                                 setGameState(stateData.state);
                             }
                         } catch (e) {
@@ -49,46 +51,57 @@ function HangmanMultiplayerPage() {
                         setPlayers(playersData);
                     }
                 } catch (e) {
-                    console.error("Polling error:", e);
-                    setError("Kon de match data niet laden: " + e.message);
-                    clearInterval(interval);
+                    // Handle session expiry
+                    if (e.message.includes("Sessie verlopen")) {
+                        setError("Sessie is verlopen. Log opnieuw in.");
+                        clearInterval(interval);
+                        return;
+                    }
+                    
+                    // Only log serious errors, ignore transient network issues or "match not started" errors
+                    if (!e.message.includes("state")) {
+                        console.error("Polling error:", e);
+                    }
                 }
             }, 2000);
         }
         return () => clearInterval(interval);
     }, [matchInfo, gameState]);
 
-
     const handleCreateMatch = async () => {
+        if (!user) {
+            setError("Je moet ingelogd zijn om een match te starten.");
+            return;
+        }
         try {
-            // Hardcoded user ID for now as auth is not fully detailed in prompt, assuming 1 for host
-            // In a real app, get from auth context
-            const userId = 1; 
-            const data = await createMatch(3, userId); // minigame_id = 3
+            // Using minigame_id = 1 for Hangman (based on solo game)
+            const data = await createMatch(1, user.id); 
             setMatchInfo({
                 match_id: data.match_id,
                 join_code: data.join_code,
-                user_id: userId,
+                user_id: user.id,
                 is_host: true
             });
         } catch (e) {
-            setError("Could not create match: " + e.message);
+            handleError(e);
         }
     };
 
     const handleJoinMatch = async () => {
+        if (!user) {
+            setError("Je moet ingelogd zijn om mee te doen.");
+            return;
+        }
         try {
-            // Hardcoded user ID for player 2
-            const userId = Math.floor(Math.random() * 1000) + 2; 
-            const data = await joinMatch(joinCodeInput, userId);
+            const data = await joinMatch(joinCodeInput, user.id);
             setMatchInfo({
                 match_id: data.match_id,
                 join_code: joinCodeInput,
-                user_id: userId,
+                user_id: user.id,
                 is_host: false
             });
         } catch (e) {
-            setError("Could not join match: " + e.message);
+            handleError(e);
         }
     };
 
@@ -98,7 +111,7 @@ function HangmanMultiplayerPage() {
             const data = await startMatch(matchInfo.match_id, matchInfo.user_id);
             setGameState(data.state);
         } catch (e) {
-            setError("Could not start match: " + e.message);
+            handleError(e);
         }
     };
 
@@ -117,10 +130,30 @@ function HangmanMultiplayerPage() {
         }
     };
 
+    const handleError = (e) => {
+        if (e.message.includes("Sessie verlopen")) {
+            setError("Sessie is verlopen. Log opnieuw in.");
+        } else {
+            setError(e.message);
+        }
+    };
+
     if (error) return (
-        <div className="p-10 text-center">
-            <div className="text-red-500 mb-4">{error}</div>
-            <button onClick={() => setError(null)} className="bg-blue text-white px-4 py-2 rounded">Terug</button>
+        <div className="p-10 text-center flex flex-col items-center">
+            <div className="text-red-500 mb-4 font-bold text-xl">{error}</div>
+            {error.includes("Sessie verlopen") || error.includes("ingelogd zijn") ? (
+                <button 
+                    onClick={() => {
+                        logout();
+                        navigate("/login");
+                    }} 
+                    className="bg-blue text-white px-6 py-3 rounded-full font-bold hover:bg-blue-dark transition"
+                >
+                    Naar Login
+                </button>
+            ) : (
+                <button onClick={() => setError(null)} className="bg-gray-200 text-gray-800 px-4 py-2 rounded">Terug</button>
+            )}
         </div>
     );
 
