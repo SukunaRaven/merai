@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {deleteProfile, fetchUserProfile, updateUsername} from "../fetches/UserFetch.jsx";
 
 function ProfileAdjustPage() {
@@ -69,7 +70,10 @@ function ProfileAdjustPage() {
     };
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <main className="py-15 px-50">
+            <main className="py-15 px-100">
+                <Link to={`/settings`}
+                      className="flex justify-between items-center py-4 text-black-blue">Terug
+                </Link>
                 <form onSubmit={handleUpdate}
                       className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Bewerk profiel</h1>

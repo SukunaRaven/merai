@@ -44,7 +44,7 @@ function LoginPage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <main className="py-15 px-50 flex justify-center items-center">
+            <main className="py-15 px-100 flex justify-center items-center">
                 <form onSubmit={handleLogin}
                       className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100 w-full max-w-md">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Login</h1>

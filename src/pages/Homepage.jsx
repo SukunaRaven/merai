@@ -4,7 +4,7 @@ function Homepage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3">
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <div className="text-center">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Welkom bij Merai!</h1>
                     <p className="text-black-blue font-secondary">Merai is een educative tool die je op een speelse

@@ -33,7 +33,7 @@ const AdminDashboard = () => {
 
     return (
         <AppLayout>
-            <div className="min-h-screen bg-white-blue p-8 font-primary">
+            <div className="max-w-7xl mx-auto min-h-screen bg-white-blue p-8 font-primary">
                 <header className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                     <div>
                         <h1 className="text-4xl font-secondary font-bold text-blue-dark">Admin Control</h1>

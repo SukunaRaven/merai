@@ -3,7 +3,7 @@ function AiTipsAndTricksPage() {
         <div className="bg-white-blue">
             <h1 className="text-black-blue font-bold text-center font-primary text-3xl mt-10 -mb-5">AI Tips en
                 Tricks</h1>
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <div className="flex justify-between font-secondary gap-10 ">
                     <div className="-mt-6 mb-15 ml-26 rounded-xlg">
                         <img src='/gemini-logo.png' alt="Gemini Logo"/>

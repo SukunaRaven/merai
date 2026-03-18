@@ -1,7 +1,7 @@
-import { useAuth } from "../../context/AuthContext.jsx";
+import {useAuth} from "../../context/AuthContext.jsx";
 
-export default function ProfileSidebar({ onSelect }) {
-    const { user } = useAuth();
+export default function ProfileSidebar({onSelect}) {
+    const {user} = useAuth();
 
     const items = [
         "Favoriete Eten",
@@ -14,7 +14,7 @@ export default function ProfileSidebar({ onSelect }) {
     ];
 
     return (
-        <aside className="w-72 bg-white rounded-xl border p-6">
+        <aside className="w-72 bg-white rounded-xl shadow-sm border-2 border-blue-light p-6">
             <div className="flex flex-col items-center mb-6">
                 <img
                     src="/placeholder-avatar.png"

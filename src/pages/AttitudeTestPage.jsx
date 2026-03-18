@@ -12,7 +12,7 @@ function AttitudeTestPage() {
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4 p-4">
                     <div className="flex flex-col">
                         <label htmlFor="question1" className="text-black-blue font-semibold">Ik geloof dat AI mijn leven
