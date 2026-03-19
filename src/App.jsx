@@ -15,6 +15,7 @@ import SettingsPage from "./pages/SettingsPage.jsx"
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import HangmanGamePage from "./pages/HangmanGamePage.jsx";
+import HangmanMultiplayerPage from "./pages/HangmanMultiplayerPage.jsx";
 import RootLayout from "./components/layout/RootLayout.jsx";
 
 const router = createBrowserRouter([
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             {
                 path: '/minigames/hangman',
                 element: <HangmanGamePage/>
+            },
+            {
+                path: '/minigames/hangman/multiplayer',
+                element: <HangmanMultiplayerPage/>
             },
             {
                 path: '/minigames/not-available',
