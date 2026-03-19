@@ -96,6 +96,7 @@ function AccessibilityPage() {
                                 <option value="grayscale">Hoog contrast (Zwart/Wit)</option>
                                 <option value="protanopia">Protanopie (Rood-zwak)</option>
                                 <option value="deuteranopia">Deuteranopie (Groen-zwak)</option>
+                                <option value="tritanopia">Tritanopia (Blauw-zwak)</option>
                             </select>
                         </div>
                     </div>
