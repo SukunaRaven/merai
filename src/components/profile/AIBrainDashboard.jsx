@@ -21,6 +21,11 @@ function WideBrainItem({ label, value, confidence, color }) {
             <div className={`text-xs font-mono font-bold ${color}`}>
                 {Math.round(confidence)}%
             </div>
+
+            <p className="text-sm text-gray-500">
+                {value}
+            </p>
+
         </div>
     );
 }
@@ -79,7 +84,9 @@ export default function AIBrainDashboard() {
                         {brainData.confirmed.map((item) => (
                             <WideBrainItem key={item.label} {...item} color="text-green-600" />
                         ))}
+
                     </div>
+
                 </Card>
 
                 {/* Sectie 2: Wat Merai Denkt (Breed kaartje) */}
@@ -105,9 +112,13 @@ export default function AIBrainDashboard() {
                         {brainData.uncertain.map((item) => (
                             <WideBrainItem key={item.label} {...item} color="text-orange-400" />
                         ))}
+
                     </div>
+
                 </Card>
+
             </div>
+
         </div>
     );
 }

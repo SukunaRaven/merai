@@ -6,13 +6,12 @@ function AttitudeTestPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you would typically handle the data submission
         setShowModal(true);
     };
 
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4 p-4">
                     <div className="flex flex-col">
                         <label htmlFor="question1" className="text-black-blue font-semibold">Ik geloof dat AI mijn leven
@@ -21,7 +20,7 @@ function AttitudeTestPage() {
                                id="question1"
                                name="question1"
                                defaultValue="0"
-                               className="border p-1"/>
+                               className="border p-1 border-gray-400 rounded"/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="question2" className="text-black-blue font-semibold">Ik geloof dat AI mijn werk
@@ -30,7 +29,7 @@ function AttitudeTestPage() {
                                id="question2"
                                name="question2"
                                defaultValue="0"
-                               className="border p-1"/>
+                               className="border p-1 border-gray-400 rounded"/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="question3" className="text-black-blue font-semibold">Ik denk dat ik in de
@@ -39,7 +38,7 @@ function AttitudeTestPage() {
                                id="question3"
                                name="question3"
                                defaultValue="0"
-                               className="border p-1"/>
+                               className="border p-1 border-gray-400 rounded"/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="question4" className="text-black-blue font-semibold">Ik denk dat AI-technologie
@@ -48,7 +47,7 @@ function AttitudeTestPage() {
                                id="question4"
                                name="question4"
                                defaultValue="0"
-                               className="border p-1"/>
+                               className="border p-1 border-gray-400 rounded"/>
                     </div>
                     <button type="submit"
                             className="rounded bg-blue text-white-blue p-2 mt-4 cursor-pointer hover:bg-blue/90">Verzenden

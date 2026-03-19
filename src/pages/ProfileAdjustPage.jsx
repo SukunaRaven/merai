@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {deleteProfile, fetchUserProfile, updateUsername} from "../fetches/UserFetch.jsx";
 
 function ProfileAdjustPage() {
@@ -68,35 +69,49 @@ function ProfileAdjustPage() {
         }
     };
     return (
-        <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <main className="py-15 px-50">
+        <div className="bg-white-blue min-h-screen">
+            <main className="max-w-4xl mx-auto py-10 md:py-15 px-4 sm:px-10 md:px-20 lg:px-40">
+
+                <Link to={`/settings`}
+                      className="inline-flex items-center py-4 text-black-blue hover:underline transition-all">
+                    ← Terug naar instellingen
+                </Link>
+
                 <form onSubmit={handleUpdate}
-                      className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
+                      className="flex flex-col gap-4 p-6 md:p-10 bg-white rounded-xl shadow-sm border border-gray-100">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Bewerk profiel</h1>
-                    <div className="flex flex-col">
-                        <label htmlFor="username" className="text-black-blue font-semibold">Gebruikersnaam:</label>
+
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="username" className="text-black-blue font-semibold">
+                            Gebruikersnaam:
+                        </label>
                         <input type="text"
                                id="username"
                                name="username"
                                value={formData.username || ''}
                                onChange={handleChange}
-                               className="border p-1 border-gray-400 rounded"
+                               className="border p-2 border-gray-300 rounded focus:ring-2 focus:ring-blue focus:outline-none transition-all"
                                required/>
                     </div>
+
                     <button type="submit"
-                            className="rounded bg-blue text-white-blue p-2 mt-4 cursor-pointer hover:bg-blue/90">Wijzigingen
-                        Opslaan
+                            className="w-full md:w-max px-8 py-2.5 bg-blue text-white rounded font-medium cursor-pointer hover:bg-blue-dark transition-colors mt-2">
+                        Wijzigingen Opslaan
                     </button>
                 </form>
-                <div className="p-4 flex gap-3 mt-auto">
-                    <button onClick={handleDelete}
-                            className="flex-1 bg-blue text-white-blue cursor-pointer text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">
-                        Verwijder Profiel
-                    </button>
-                    {/*<button onClick={handleDelete}*/}
-                    {/*        className="flex-1 bg-blue text-white-blue cursor-pointer text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">*/}
-                    {/*    Reset Profiel*/}
-                    {/*</button>*/}
+
+                <div className="mt-10 pt-6 border-t border-gray-200">
+                    <p className="text-sm text-gray-500 mb-4">Gevaarlijke acties</p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        <button onClick={handleDelete}
+                                className="flex-1 bg-red-500 text-white cursor-pointer text-center py-2.5 px-4 rounded-lg text-sm font-medium hover:bg-red-600 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            Verwijder Profiel
+                        </button>
+                        {/*<button onClick={handleDelete}*/}
+                        {/*        className="flex-1 bg-blue text-white-blue cursor-pointer text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-dark hover:text-white-blue transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark">*/}
+                        {/*    Reset Profiel*/}
+                        {/*</button>*/}
+                    </div>
                 </div>
             </main>
         </div>

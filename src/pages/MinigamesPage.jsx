@@ -27,7 +27,7 @@ export default function MinigamesPage() {
 
     return (
         <div>
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <h1 className="text-3xl font-semibold font-primary text-black-blue mb-8">
                     Minigames
                 </h1>

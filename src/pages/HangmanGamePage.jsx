@@ -51,7 +51,7 @@ function HangmanGamePage() {
     if (!gameState) return <div className="p-10 text-center">Laden...</div>;
 
     return (<div className="bg-white-blue min-h-screen">
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <h1 className="text-black-blue font-bold text-center font-primary text-3xl -mt-10 mb-5">Galgje</h1>
                 <div className="flex justify-between gap-4 text-sm mt-5 font-medium">
                     <div className="flex-1 text-center bg-white rounded-xl p-7 shadow-sm">

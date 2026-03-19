@@ -2,7 +2,8 @@ import Button from "../ui/Button"
 
 export default function FamilyCard({name, role, privacy, knowledge, finished}) {
     return (
-        <div className="bg-white rounded-xl border p-5 flex flex-col gap-4">
+        <div
+            className="py-10 p-10 bg-white rounded-xl shadow-sm border border-primary flex flex-col gap-4">
 
             <div className="h-28 bg-gray-100 rounded-md"/>
 
