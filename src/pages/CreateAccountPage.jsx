@@ -1,7 +1,6 @@
-import Nav from "../components/layout/Nav.jsx";
 import {useState} from "react";
-import {useNavigate} from "react-router";
-import { createUser } from "../fetches/UserFetch.jsx"; // Import the createUser function
+import {useNavigate} from "react-router-dom";
+import {createUser} from "../fetches/UserFetch.jsx";
 
 function CreateAccountPage() {
     const [formData, setFormData] = useState({
@@ -19,25 +18,30 @@ function CreateAccountPage() {
         });
     };
 
+    const [showModal, setShowModal] = useState(false);
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
-            const data = await createUser(formData); // Use the centralized createUser function
-            
+            const data = await createUser(formData);
+
             console.log("Account succesvol aangemaakt!", data);
-            alert("Account aangemaakt! Je kunt nu inloggen.");
-            navigate("/login");
+            setShowModal(true);
         } catch (error) {
             console.error("Registratie mislukt:", error);
             alert("Registratie mislukt: " + error.message);
         }
     };
 
+    const handleModalClose = () => {
+        setShowModal(false);
+        navigate("/login");
+    };
+
     return (
         <div className="bg-white-blue flex flex-col gap-3 min-h-screen relative">
-            <Nav/>
-            <main className="py-15 px-25">
+            <main className="py-15 px-100">
                 <form onSubmit={handleRegister}
                       className="flex flex-col gap-2 py-10 p-10 bg-white rounded-xl shadow-sm border border-gray-100">
                     <h1 className="text-black-blue font-bold font-primary text-2xl">Maak account aan</h1>
@@ -45,7 +49,7 @@ function CreateAccountPage() {
                         <label htmlFor="username" className="text-black-blue font-semibold">Gebruikersnaam:</label>
                         <input type="text"
                                id="username"
-                               name="username" // Moet exact matchen met de key in formData
+                               name="username"
                                value={formData.username}
                                onChange={handleChange}
                                className="border p-1 border-gray-400 rounded"
@@ -71,26 +75,26 @@ function CreateAccountPage() {
                                className="border p-1 border-gray-400 rounded"
                                required/>
                     </div>
-                    {/*<div className="flex flex-col">*/}
-                    {/*    <label htmlFor="role" className="text-black-blue font-semibold">Rol:</label>*/}
-                    {/*    <input type="text"*/}
-                    {/*           id="role"*/}
-                    {/*           name="role"*/}
-                    {/*           className="border p-1 border-gray-400 rounded"/>*/}
-                    {/*</div>*/}
-                    {/*<div className="flex flex-col">*/}
-                    {/*    <label htmlFor="language" className="text-black-blue font-semibold">Taal:</label>*/}
-                    {/*    <input type="text"*/}
-                    {/*           id="language"*/}
-                    {/*           name="language"*/}
-                    {/*           className="border p-1 border-gray-400 rounded"/>*/}
-                    {/*</div>*/}
-
                     <button type="submit"
                             className="rounded bg-blue text-white-blue p-2 mt-4 cursor-pointer hover:bg-blue/90">Verzenden
                     </button>
                 </form>
             </main>
+
+            {showModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+                        <h2 className="text-2xl font-bold mb-4 text-blue">Account succesvol aangemaakt!</h2>
+                        <p className="mb-6 text-gray-600">Account aangemaakt! Je kunt nu inloggen.</p>
+                        <button
+                            onClick={handleModalClose}
+                            className="inline-block bg-blue-light text-black-blue px-6 py-2 rounded hover:bg-primary/90 transition-colors"
+                        >
+                            Inloggen
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

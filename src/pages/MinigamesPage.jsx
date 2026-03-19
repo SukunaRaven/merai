@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import GameCard from "../components/games/GameCard";
-import Nav from "../components/layout/Nav.jsx";
 import {fetchMinigames} from "../fetches/MinigameFetch.jsx";
-import SettingsItem from "../components/ui/SettingsItem.jsx";
 
 export default function MinigamesPage() {
     const [minigames, setMinigames] = useState([]);
@@ -29,8 +27,7 @@ export default function MinigamesPage() {
 
     return (
         <div>
-            <Nav/>
-            <main className="py-15 px-25">
+            <main className="max-w-7xl mx-auto py-15 px-25">
                 <h1 className="text-3xl font-semibold font-primary text-black-blue mb-8">
                     Minigames
                 </h1>
@@ -40,13 +37,15 @@ export default function MinigamesPage() {
 
                 {!loading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {minigames.map((game) => (
-                            <GameCard
-                                key={game._id}
-                                title={game.name}
-                                description={game.description}
-                                to="/minigames/hangman"/>
-                        ))}
+                        {minigames.map((game) => {
+                            const isHangman = game.name.toLowerCase() === "hangman" || game.name.toLowerCase() === "galgje";
+                            return (<GameCard
+                                    key={game._id}
+                                    title={game.name}
+                                    description={game.description}
+                                    to={isHangman ? "/minigames/hangman" : "/minigames/not-available"}/>
+                            )
+                        })}
                     </div>
                 )}
             </main>
