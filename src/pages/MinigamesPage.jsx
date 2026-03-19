@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import GameCard from "../components/games/GameCard";
+import GameCard from "../components/games/GameCard.jsx";
 import {fetchMinigames} from "../fetches/MinigameFetch.jsx";
 
 export default function MinigamesPage() {
@@ -13,22 +13,20 @@ export default function MinigamesPage() {
                 setLoading(true);
                 const data = await fetchMinigames();
                 setMinigames(data);
-                setError(null);
             } catch (error) {
                 setError(error.message);
-                console.error("Failed to fetch minigames:", error);
             } finally {
                 setLoading(false);
             }
         };
 
         getMinigames();
-    }, []); // Empty dependency array means this runs once on mount
+    }, []);
 
     return (
-        <div>
-            <main className="max-w-7xl mx-auto py-15 px-25">
-                <h1 className="text-3xl font-semibold font-primary text-black-blue mb-8">
+        <div className="bg-white-blue min-h-screen">
+            <main className="py-15 px-25">
+                <h1 className="text-3xl font-bold font-primary text-black-blue mb-8">
                     Minigames
                 </h1>
 
@@ -38,13 +36,16 @@ export default function MinigamesPage() {
                 {!loading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {minigames.map((game) => {
-                            const isHangman = game.name.toLowerCase() === "hangman" || game.name.toLowerCase() === "galgje";
-                            return (<GameCard
-                                    key={game._id}
+                            const isHangman = game.name.toLowerCase().includes("galgje") || game.name.toLowerCase().includes("hangman");
+                            return (
+                                <GameCard
+                                    key={game.id}
                                     title={game.name}
                                     description={game.description}
-                                    to={isHangman ? "/minigames/hangman" : "/minigames/not-available"}/>
-                            )
+                                    to={isHangman ? "/minigames/hangman" : "/minigames/not-available"}
+                                    toMulti={isHangman ? "/minigames/hangman/multiplayer" : null}
+                                />
+                            );
                         })}
                     </div>
                 )}

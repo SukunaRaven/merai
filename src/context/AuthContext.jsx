@@ -15,31 +15,34 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("AuthProvider mounted");
         // Check for token on mount
         const token = localStorage.getItem('authToken');
         const username = localStorage.getItem('username');
         const role = localStorage.getItem('role');
+        const userId = localStorage.getItem('userId');
         
         if (token) {
             // Parse role to integer if it exists, otherwise default to 0
             const parsedRole = role ? parseInt(role, 10) : 0;
-            setUser({ username, role: parsedRole });
+            const parsedId = userId ? parseInt(userId, 10) : null;
+            setUser({ username, role: parsedRole, id: parsedId });
         }
         setLoading(false);
     }, []);
 
-    const login = (token, username, role) => {
+    const login = (token, username, role, userId) => {
         localStorage.setItem('authToken', token);
         localStorage.setItem('username', username);
         localStorage.setItem('role', role);
-        setUser({ username, role: parseInt(role, 10) });
+        localStorage.setItem('userId', userId);
+        setUser({ username, role: parseInt(role, 10), id: parseInt(userId, 10) });
     };
 
     const logout = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('username');
         localStorage.removeItem('role');
+        localStorage.removeItem('userId');
         setUser(null);
     };
 
