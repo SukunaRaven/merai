@@ -1,4 +1,3 @@
-// src/fetches/AiFetch.jsx
 const API_URL = 'http://145.24.237.168:8000/ai';
 
 export const aiService = {
@@ -9,10 +8,10 @@ export const aiService = {
                 headers: { 'Accept': 'application/json' }
             });
 
-            // Als de data NIET gevonden is (404), sturen we nep-data terug voor de test
             if (res.status === 404) {
                 console.warn("Server gaf 404, we gebruiken nu test-data uit de frontend.");
                 return {
+                    username: "Test Gebruiker",
                     movie: "Interstellar (Test)",
                     movie_genre: "Sci-Fi",
                     artist: "Hans Zimmer",

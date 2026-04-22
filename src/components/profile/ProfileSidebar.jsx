@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthContext.jsx";
 export default function ProfileSidebar({ onSelect, selectedItem }) {
     const { user } = useAuth();
 
-    // De 'id' moet exact gelijk zijn aan de kolomnaam in je SQL tabel 'themes'
     const menuItems = [
         { id: "food", label: "Favoriete Eten" },
         { id: "artist", label: "Favoriete Artiest" },
@@ -18,10 +17,12 @@ export default function ProfileSidebar({ onSelect, selectedItem }) {
         <aside className="w-72 bg-white rounded-xl border p-6 shadow-sm h-fit">
             <div className="flex flex-col items-center mb-6">
                 <div className="w-24 h-24 bg-blue-light rounded-full flex items-center justify-center text-blue text-3xl font-bold mb-2">
-                    {user?.username?.charAt(0).toUpperCase() || "U"}
+                    {typeof user?.username === 'string'
+                        ? user.username.charAt(0).toUpperCase()
+                        : "U"}
                 </div>
                 <p className="text-sm text-gray-500 font-medium">
-                    @{user ? user.username : "Gebruiker"}
+                    {user?.username ? `@${user.username}` : "Laden..."}
                 </p>
             </div>
 

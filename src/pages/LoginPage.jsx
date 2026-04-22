@@ -25,15 +25,11 @@ function LoginPage() {
 
         try {
             const data = await loginUser(credentials);
-            
-            if (!data.token) {
-                throw new Error("Geen token ontvangen van server.");
-            }
 
             const userRole = data.user?.role || data.role || 0;
             const userId = data.user?.id || data.id;
 
-            login(data.token, data.user.username, userRole, userId);
+            login(data.user.username, userRole, userId);
 
             console.log("Login succesvol!", data);
             setShowModal(true);
